@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">kotlinButtonNavi</string>
+    <string name="title_home">Home</string>
+    <string name="title_weather">weather</string>
+    <string name="title_calender">calender</string>
+    <string name="title_chat">chat</string>
+    <string name="title_setting">setting</string>
+    <string name="goHome">go home</string>
+</resources>
