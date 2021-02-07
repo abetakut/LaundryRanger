@@ -10,6 +10,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.example.kotlinbuttonnavi.R
 
+@Suppress("DEPRECATION")
 class HomeFragment : Fragment() {
 
     private lateinit var homeViewModel: HomeViewModel

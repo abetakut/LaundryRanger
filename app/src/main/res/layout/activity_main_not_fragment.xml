@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.home.HomeFragment">
+    android:layout_height="match_parent">
 
     <RelativeLayout
         android:id="@+id/home_relative"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/gradient_bg"
+        android:orientation="vertical"
         android:padding="25dp">
 
         <RelativeLayout
@@ -31,14 +31,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="City Name"
-                    android:textSize="24dp" />
+                    android:textSize="24sp" />
 
-                <TextView
-                    android:id="@+id/updated_at"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="update time"
-                    android:textSize="14dp" />
+<!--                <TextView-->
+<!--                    android:id="@+id/updated_at"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="update time"-->
+<!--                    android:textSize="14sp" />-->
             </LinearLayout>
 
             <LinearLayout
@@ -55,7 +55,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:text="weathe status"
-                    android:textSize="18dp" />
+                    android:textSize="18sp" />
 
                 <TextView
                     android:id="@+id/temp"
@@ -64,7 +64,7 @@
                     android:layout_gravity="center"
                     android:fontFamily="sans-serif-thin"
                     android:text="now hot?"
-                    android:textSize="60dp" />
+                    android:textSize="60sp" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -76,17 +76,17 @@
                         android:id="@+id/temp_min"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Min Temp:\n minmin" />
+                        android:text="Min Temp: minmin" />
 
                     <Space
-                        android:layout_width="50dp"
+                        android:layout_width="20dp"
                         android:layout_height="wrap_content" />
 
                     <TextView
                         android:id="@+id/temp_max"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Max Temp:\n maxmax" />
+                        android:text="Max Temp: maxmax" />
                 </LinearLayout>
 
 
@@ -94,7 +94,6 @@
                     android:id="@+id/sentakun_image"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/overviewContainer"
                     android:layout_gravity="center"
                     android:src="@drawable/kaden_sentakuki" />
 
@@ -126,27 +125,27 @@
                                 android:src="@drawable/sunrise"
                                 app:tint="#000000" />
 
-                            <Space
-                                android:layout_width="wrap_content"
-                                android:layout_height="5dp" />
+<!--                            <Space-->
+<!--                                android:layout_width="wrap_content"-->
+<!--                                android:layout_height="5dp" />-->
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="Sunrise"
-                                android:textSize="12dp" />
+                                android:textSize="12sp" />
 
                             <TextView
                                 android:id="@+id/sunrise"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="sunrise time"
-                                android:textSize="14dp" />
+                                android:textSize="14sp" />
                         </LinearLayout>
 
-                        <Space
-                            android:layout_width="10dp"
-                            android:layout_height="wrap_content" />
+<!--                        <Space-->
+<!--                            android:layout_width="10dp"-->
+<!--                            android:layout_height="wrap_content" />-->
 
                         <LinearLayout
                             android:layout_width="0dp"
@@ -163,22 +162,22 @@
                                 android:src="@drawable/sunset"
                                 app:tint="#000000" />
 
-                            <Space
-                                android:layout_width="wrap_content"
-                                android:layout_height="5dp" />
+<!--                            <Space-->
+<!--                                android:layout_width="wrap_content"-->
+<!--                                android:layout_height="5dp" />-->
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="Sunset"
-                                android:textSize="12dp" />
+                                android:textSize="12sp" />
 
                             <TextView
                                 android:id="@+id/sunset"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="sunset time"
-                                android:textSize="14dp" />
+                                android:textSize="14sp" />
                         </LinearLayout>
 
                         <Space
@@ -200,22 +199,22 @@
                                 android:src="@drawable/wind"
                                 app:tint="#000000" />
 
-                            <Space
-                                android:layout_width="wrap_content"
-                                android:layout_height="5dp" />
+<!--                            <Space-->
+<!--                                android:layout_width="wrap_content"-->
+<!--                                android:layout_height="5dp" />-->
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="Wind"
-                                android:textSize="12dp" />
+                                android:textSize="12sp" />
 
                             <TextView
                                 android:id="@+id/wind"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="windd"
-                                android:textSize="14dp" />
+                                android:textSize="14sp" />
                         </LinearLayout>
                     </LinearLayout>
 
