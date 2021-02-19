@@ -11,7 +11,7 @@
         android:layout_height="match_parent"
         android:background="@drawable/gradient_bg"
         android:orientation="vertical"
-        android:padding="25dp">
+        android:padding="5sp">
 
         <RelativeLayout
             android:id="@+id/mainContainer"
@@ -31,14 +31,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="City Name"
-                    android:textSize="24sp" />
+                    android:textSize="18sp" />
 
-<!--                <TextView-->
-<!--                    android:id="@+id/updated_at"-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:text="update time"-->
-<!--                    android:textSize="14sp" />-->
+                <!--                <TextView-->
+                <!--                    android:id="@+id/updated_at"-->
+                <!--                    android:layout_width="wrap_content"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    android:text="update time"-->
+                <!--                    android:textSize="14sp" />-->
             </LinearLayout>
 
             <LinearLayout
@@ -55,47 +55,45 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:text="weathe status"
-                    android:textSize="18sp" />
+                    android:textSize="25sp" />
 
-                <TextView
-                    android:id="@+id/temp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:fontFamily="sans-serif-thin"
-                    android:text="now hot?"
-                    android:textSize="60sp" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:id="@+id/temp_min"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Min Temp: minmin" />
-
-                    <Space
-                        android:layout_width="20dp"
-                        android:layout_height="wrap_content" />
-
-                    <TextView
-                        android:id="@+id/temp_max"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Max Temp: maxmax" />
-                </LinearLayout>
-
-
+                <!--TODO:天気予報にあわせてセンタくんの画像に変換する。複数の画像差し替え可能か？-->
                 <ImageView
                     android:id="@+id/sentakun_image"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="300sp"
+                    android:layout_height="300sp"
+                    android:padding="5sp"
                     android:layout_gravity="center"
                     android:src="@drawable/kaden_sentakuki" />
+
+                <LinearLayout
+                    android:id="@+id/currentContainer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/sentakun_image"
+                    android:orientation="horizontal"
+                    android:weightSum="5">
+
+                    <ImageView
+                        android:layout_width="25sp"
+                        android:layout_height="25sp"
+                        android:layout_weight="2"
+                        android:layout_gravity="center_vertical"
+                        android:src="@drawable/weather"
+                        app:tint="#000000" />
+
+
+                    <TextView
+                        android:id="@+id/temp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:gravity="center_horizontal"
+                        android:layout_weight="3"
+                        android:fontFamily="sans-serif-thin"
+                        android:text="20.0C"
+                        android:textSize="60sp" />
+                </LinearLayout>
 
                 <LinearLayout
                     android:id="@+id/detailsContainer"
@@ -108,7 +106,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
-                        android:weightSum="3">
+                        android:weightSum="4">
 
                         <LinearLayout
                             android:layout_width="0dp"
@@ -118,6 +116,13 @@
                             android:gravity="center"
                             android:orientation="vertical"
                             android:padding="8dp">
+
+                            <TextView
+                                android:id="@+id/laterTime3"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="3hour"
+                                android:textSize="12sp" />
 
                             <ImageView
                                 android:layout_width="25dp"
@@ -125,27 +130,13 @@
                                 android:src="@drawable/sunrise"
                                 app:tint="#000000" />
 
-<!--                            <Space-->
-<!--                                android:layout_width="wrap_content"-->
-<!--                                android:layout_height="5dp" />-->
-
                             <TextView
+                                android:id="@+id/laterTemp3"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Sunrise"
-                                android:textSize="12sp" />
-
-                            <TextView
-                                android:id="@+id/sunrise"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="sunrise time"
+                                android:text="temp"
                                 android:textSize="14sp" />
                         </LinearLayout>
-
-<!--                        <Space-->
-<!--                            android:layout_width="10dp"-->
-<!--                            android:layout_height="wrap_content" />-->
 
                         <LinearLayout
                             android:layout_width="0dp"
@@ -156,33 +147,26 @@
                             android:orientation="vertical"
                             android:padding="8dp">
 
+                            <TextView
+                                android:id="@+id/laterTime6"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="6hour"
+                                android:textSize="12sp" />
+
                             <ImageView
                                 android:layout_width="25dp"
                                 android:layout_height="25dp"
-                                android:src="@drawable/sunset"
+                                android:src="@drawable/sunrise"
                                 app:tint="#000000" />
 
-<!--                            <Space-->
-<!--                                android:layout_width="wrap_content"-->
-<!--                                android:layout_height="5dp" />-->
-
                             <TextView
+                                android:id="@+id/laterTemp6"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Sunset"
-                                android:textSize="12sp" />
-
-                            <TextView
-                                android:id="@+id/sunset"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="sunset time"
+                                android:text="temp"
                                 android:textSize="14sp" />
                         </LinearLayout>
-
-                        <Space
-                            android:layout_width="10dp"
-                            android:layout_height="wrap_content" />
 
                         <LinearLayout
                             android:layout_width="0dp"
@@ -193,33 +177,189 @@
                             android:orientation="vertical"
                             android:padding="8dp">
 
+                            <TextView
+                                android:id="@+id/laterTime9"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="9hour"
+                                android:textSize="12sp" />
+
                             <ImageView
                                 android:layout_width="25dp"
                                 android:layout_height="25dp"
-                                android:src="@drawable/wind"
+                                android:src="@drawable/sunrise"
                                 app:tint="#000000" />
 
-<!--                            <Space-->
-<!--                                android:layout_width="wrap_content"-->
-<!--                                android:layout_height="5dp" />-->
-
                             <TextView
+                                android:id="@+id/laterTemp9"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Wind"
-                                android:textSize="12sp" />
-
-                            <TextView
-                                android:id="@+id/wind"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="windd"
+                                android:text="temp"
                                 android:textSize="14sp" />
                         </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:background="#3CF1EBF1"
+                            android:gravity="center"
+                            android:orientation="vertical"
+                            android:padding="8dp">
+
+                            <TextView
+                                android:id="@+id/laterTime12"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="12hour"
+                                android:textSize="12sp" />
+
+                            <ImageView
+                                android:layout_width="25dp"
+                                android:layout_height="25dp"
+                                android:src="@drawable/sunrise"
+                                app:tint="#000000" />
+
+                            <TextView
+                                android:id="@+id/laterTemp12"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="temp"
+                                android:textSize="14sp" />
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:weightSum="4">
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:background="#3CF1EBF1"
+                            android:gravity="center"
+                            android:orientation="vertical"
+                            android:padding="8dp">
+
+                            <TextView
+                                android:id="@+id/laterTime15"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="15hour"
+                                android:textSize="12sp" />
+
+                            <ImageView
+                                android:layout_width="25dp"
+                                android:layout_height="25dp"
+                                android:src="@drawable/sunrise"
+                                app:tint="#000000" />
+
+                            <TextView
+                                android:id="@+id/laterTemp15"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="temp"
+                                android:textSize="14sp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:background="#3CF1EBF1"
+                            android:gravity="center"
+                            android:orientation="vertical"
+                            android:padding="8dp">
+
+                            <TextView
+                                android:id="@+id/laterTime18"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="18hour"
+                                android:textSize="12sp" />
+
+                            <ImageView
+                                android:layout_width="25dp"
+                                android:layout_height="25dp"
+                                android:src="@drawable/sunrise"
+                                app:tint="#000000" />
+
+                            <TextView
+                                android:id="@+id/laterTemp18"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="temp"
+                                android:textSize="14sp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:background="#3CF1EBF1"
+                            android:gravity="center"
+                            android:orientation="vertical"
+                            android:padding="8dp">
+
+                            <TextView
+                                android:id="@+id/laterTime21"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="21hour"
+                                android:textSize="12sp" />
+
+                            <ImageView
+                                android:layout_width="25dp"
+                                android:layout_height="25dp"
+                                android:src="@drawable/sunrise"
+                                app:tint="#000000" />
+
+                            <TextView
+                                android:id="@+id/laterTemp21"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="temp"
+                                android:textSize="14sp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:background="#3CF1EBF1"
+                            android:gravity="center"
+                            android:orientation="vertical"
+                            android:padding="8dp">
+
+                            <TextView
+                                android:id="@+id/laterTime24"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="24hour"
+                                android:textSize="12sp" />
+
+                            <ImageView
+                                android:layout_width="25dp"
+                                android:layout_height="25dp"
+                                android:src="@drawable/sunrise"
+                                app:tint="#000000" />
+
+                            <TextView
+                                android:id="@+id/laterTemp24"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="temp"
+                                android:textSize="14sp" />
+                        </LinearLayout>
+
                     </LinearLayout>
 
                 </LinearLayout>
-
+                <!--TODO:下の方に未来5日分の天気情報ざっくりでいいから表示させたい-->
             </LinearLayout>
 
         </RelativeLayout>
