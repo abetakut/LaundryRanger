@@ -43,21 +43,22 @@
                 android:orientation="horizontal"
                 android:weightSum="5">
 
+<!--                ToDo:文字サイズの調整-->
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="50sp"
                     android:layout_weight="2"
                     android:gravity="center_horizontal"
-                    android:text="City:"
-                    android:textSize="25sp" />
+                    android:text="市区町村:"
+                    android:textSize="10sp" />
 
                 <TextView
                     android:id="@+id/textView_cityName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="3"
-                    android:text="tokyo"
-                    android:textSize="25sp" />
+                    android:text="郵便番号を入力してください"
+                    android:textSize="10sp" />
 
             </LinearLayout>
 
@@ -71,6 +72,9 @@
                     android:id="@+id/editText_City"
                     android:layout_width="match_parent"
                     android:layout_height="50sp"
+                    android:hint="123-4567"
+                    android:inputType="text"
+                    android:imeOptions="actionDone"
                     android:layout_weight="4" />
 
                 <Button

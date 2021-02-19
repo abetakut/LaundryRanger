@@ -10,17 +10,13 @@ import android.widget.ProgressBar
 import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.example.kotlinbuttonnavi.R
-import kotlinx.android.synthetic.main.fragment_setting.*
 import org.json.JSONArray
 import org.json.JSONObject
 import java.net.URL
 import java.text.SimpleDateFormat
 import java.util.*
-private const val TAG = "HomeFragment"
-var CITY: String = "tokyo,jp"
 val LAT: String = "35.689889"
 val LON: String = "139.847066"
 val API: String = "c2a219ef0c9aa522f4d7e55389de631d" // Use API key
@@ -28,37 +24,46 @@ val API: String = "c2a219ef0c9aa522f4d7e55389de631d" // Use API key
 
 @Suppress("DEPRECATION")
 class HomeFragment : Fragment() {
+    private val TAG = "HomeFragment"
 
+    //変数の初期化
     private lateinit var homeViewModel: HomeViewModel
     private lateinit var addressTextView: TextView
     private lateinit var statusTextView: TextView
     private lateinit var tempTextView: TextView
+    private lateinit var tempMin: TextView
+    private lateinit var tempMax: TextView
+    private lateinit var windSpeed: TextView
+
     private lateinit var loaderProgressBar: ProgressBar
     private lateinit var mainContainerRelativeLayout: RelativeLayout
     private lateinit var errorTextTextView: TextView
     private lateinit var laterTime3TextView: TextView
     private lateinit var laterTemp3TextView: TextView
-    private var cityName: String = "tokyo"
+    var CITY: String? = ""
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        homeViewModel =
-                ViewModelProviders.of(this).get(HomeViewModel::class.java)
-        val root = inflater.inflate(R.layout.fragment_home, container, false)
+        Log.d(TAG, "onCreateView: start")
+        homeViewModel = ViewModelProviders.of(this).get(HomeViewModel::class.java)
+        val view = inflater.inflate(R.layout.fragment_home, container, false)
 
-        //ToDo:設定画面の都市入力値を取得
-//        cityName = if (textView_cityName.text != null){
-//            arguments?.getString("BUNDLE_KEY_CITY").toString() // "タイトル"
-//        }else{
-//            "tokyo"
-//        }
+        CITY = arguments?.getString("PostCode")
+        CITY = "$CITY,jp"
+
         //APIでJSON取得＆加工
+        //Current weather
         weatherTask().execute()
+        //5 day weather forecast
         fiveDaysWeatherTask().execute()
-        return root
+
+        Log.d(TAG, "onCreateView: end")
+        return view
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        Log.d(TAG, "onViewCreated: start")
+        Log.d(TAG, "onViewCreated: set variable")
 
         addressTextView = view.findViewById(R.id.address)
         statusTextView = view.findViewById(R.id.status)
@@ -69,25 +74,24 @@ class HomeFragment : Fragment() {
         laterTime3TextView = view.findViewById(R.id.laterTime3)
         laterTemp3TextView = view.findViewById(R.id.laterTemp3)
 
+        Log.d(TAG, "onViewCreated: end")
     }
 
     //Current weather
     inner class weatherTask() : AsyncTask<String, Void, String>() {
+        private val TAG = "HomeFragment:weatherTask"
 
         override fun onPreExecute() {
             super.onPreExecute()
-            Log.d(TAG, "weatherTask onPreExecute: start")
+            Log.d(TAG, "onPreExecute: start")
             /* Showing the ProgressBar, Making the main design GONE */
-//            findViewById<ProgressBar>(R.id.loader).visibility = View.VISIBLE
-//            findViewById<RelativeLayout>(R.id.mainContainer).visibility = View.GONE
-//            findViewById<TextView>(R.id.errorText).visibility = View.GONE
-            Log.d(TAG, "weatherTask onPreExecute: finish")
+            //onViewCreated()で宣言するようになった
+            Log.d(TAG, "onPreExecute: end")
         }
 
-        //        TODO:未来5日分のデータ欲しい
         override fun doInBackground(vararg params: String?): String? {
+            Log.d(TAG, "doInBackground: start")
             var response: String?
-            Log.d(TAG, "weatherTask doInBackground: start")
             try {
 //                TODO:言語設定もそのうちユーザーが選択できるようにしたい
                 response =
@@ -98,13 +102,13 @@ class HomeFragment : Fragment() {
             } catch (e: Exception) {
                 response = null
             }
-            Log.d(TAG, "weatherTask doInBackground: end")
+            Log.d(TAG, "doInBackground: end")
             return response
         }
 
         override fun onPostExecute(result: String?) {
             super.onPostExecute(result)
-            Log.d(TAG, "weatherTask onPostExecute: start")
+            Log.d(TAG, "onPostExecute: start")
             try {
                 /* Extracting JSON returns from the API */
                 val jsonObj = JSONObject(result)
@@ -142,16 +146,8 @@ class HomeFragment : Fragment() {
 
                 /* Populating extracted data into our views */
                 addressTextView.text = address
-//                findViewById<TextView>(R.id.updated_at).text =  updatedAtText
                 statusTextView.text = weatherDescription.capitalize()
                 tempTextView.text = temp
-//                findViewById<TextView>(R.id.temp_min).text = tempMin
-//                findViewById<TextView>(R.id.temp_max).text = tempMax
-//                findViewById<TextView>(R.id.sunrise).text =
-//                    SimpleDateFormat("hh:mm a", Locale.ENGLISH).format(Date(sunrise * 1000))
-//                findViewById<TextView>(R.id.sunset).text =
-//                    SimpleDateFormat("hh:mm a", Locale.ENGLISH).format(Date(sunset * 1000))
-//                findViewById<TextView>(R.id.wind).text = windSpeed
 
                 /* Views populated, Hiding the loader, Showing the main design */
                 loaderProgressBar.visibility = View.GONE
@@ -161,28 +157,27 @@ class HomeFragment : Fragment() {
                 loaderProgressBar.visibility = View.GONE
                 errorTextTextView.visibility = View.VISIBLE
             }
-            Log.d(TAG, "weatherTask onPostExecute: end")
+            Log.d(TAG, "onPostExecute: end")
         }
 
     }
 
     //5 day weather forecast
     inner class fiveDaysWeatherTask() : AsyncTask<String, Void, String>() {
+        private val TAG = "HomeFragment:fiveDaysWeatherTask"
 
         override fun onPreExecute() {
             super.onPreExecute()
-            Log.d(TAG, "fiveDaysWeatherTask onPreExecute: start")
+            Log.d(TAG, "onPreExecute: start")
             /* Showing the ProgressBar, Making the main design GONE */
-//            findViewById<ProgressBar>(R.id.loader).visibility = View.VISIBLE
-//            findViewById<RelativeLayout>(R.id.mainContainer).visibility = View.GONE
-//            findViewById<TextView>(R.id.errorText).visibility = View.GONE
-            Log.d(TAG, "fiveDaysWeatherTask onPreExecute: end")
+            //onViewCreated()で宣言するようになった
+            Log.d(TAG, "onPreExecute: end")
         }
 
         //        TODO:未来5日分のデータ欲しい
         override fun doInBackground(vararg params: String?): String? {
+            Log.d(TAG, "doInBackground: start")
             var response: String?
-            Log.d(TAG, "fiveDaysWeatherTask doInBackground: start")
             try {
 //                TODO:言語設定もそのうちユーザーが選択できるようにしたい
                 response =
@@ -193,13 +188,13 @@ class HomeFragment : Fragment() {
             } catch (e: Exception) {
                 response = null
             }
-            Log.d(TAG, "fiveDaysWeatherTask doInBackground: end")
+            Log.d(TAG, "doInBackground: end")
             return response
         }
 
         override fun onPostExecute(result: String?) {
             super.onPostExecute(result)
-            Log.d(TAG, "fiveDaysWeatherTask onPostExecute: start")
+            Log.d(TAG, "onPostExecute: start")
             try {
                 /* Extracting JSON returns from the API */
                 val jsonObj = JSONObject(result)
@@ -237,15 +232,10 @@ class HomeFragment : Fragment() {
                 val address = city.getString("name") + ", " + city.getString("country")
 
                 /* Populating extracted data into our views */
-//                findViewById<TextView>(R.id.address).text = address
                 laterTime3TextView.text = updatedAtText
-//                findViewById<TextView>(R.id.status).text = weatherDescription.capitalize()
                 laterTemp3TextView.text = temp
-//                findViewById<TextView>(R.id.temp_min).text = tempMin
-//                findViewById<TextView>(R.id.temp_max).text = tempMax
 //                findViewById<TextView>(R.id.sunrise).text = SimpleDateFormat("hh:mm a", Locale.ENGLISH).format(Date(sunrise * 1000))
 //                findViewById<TextView>(R.id.sunset).text = SimpleDateFormat("hh:mm a", Locale.ENGLISH).format(Date(sunset * 1000))
-//                findViewById<TextView>(R.id.wind).text = windSpeed
 
                 //TODO:日数分取得してリストに入れたい
 //                if (jsonArray != null) {
@@ -258,19 +248,20 @@ class HomeFragment : Fragment() {
 //                }
 
                 /* Views populated, Hiding the loader, Showing the main design */
-//                findViewById<ProgressBar>(R.id.loader).visibility = View.GONE
-//                findViewById<RelativeLayout>(R.id.mainContainer).visibility = View.VISIBLE
+                loaderProgressBar.visibility = View.GONE
+                mainContainerRelativeLayout.visibility = View.VISIBLE
 
             } catch (e: Exception) {
-//                findViewById<ProgressBar>(R.id.loader).visibility = View.GONE
-//                findViewById<TextView>(R.id.errorText).visibility = View.VISIBLE
+                loaderProgressBar.visibility = View.GONE
+                errorTextTextView.visibility = View.VISIBLE
             }
-            Log.d(TAG, "fiveDaysWeatherTask onPostExecute: end")
+            Log.d(TAG, "onPostExecute: end")
         }
 
     }
 
     //One Call API
+    //緯度経度で住所特定するからあまり使いたくない
     inner class dailyWeatherTask() : AsyncTask<String, Void, String>() {
 
         override fun onPreExecute() {
