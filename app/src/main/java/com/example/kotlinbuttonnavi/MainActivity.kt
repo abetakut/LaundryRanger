@@ -24,7 +24,7 @@ class MainActivity : AppCompatActivity(), Communicator {
         navView.setupWithNavController(navController)
 
         val settingFragment = SettingFragment()
-        supportFragmentManager.beginTransaction().replace(R.id.nav_host_fragment,settingFragment).commit()
+//        supportFragmentManager.beginTransaction().replace(R.id.nav_host_fragment,settingFragment).commit()
 
         Log.d(TAG, "onCreate: end")
     }
@@ -38,8 +38,7 @@ class MainActivity : AppCompatActivity(), Communicator {
         bundle.putString("PostCode", editTextInput)
         homeFragment.arguments = bundle
 
-        transaction.replace(R.id.nav_host_fragment, homeFragment)
-        transaction.commit()
+        transaction.replace(R.id.nav_host_fragment, homeFragment).commit()
         Log.d(TAG, "passDataCom: end")
     }
 

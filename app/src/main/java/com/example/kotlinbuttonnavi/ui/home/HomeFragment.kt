@@ -20,7 +20,7 @@ import java.util.*
 val LAT: String = "35.689889"
 val LON: String = "139.847066"
 val API: String = "c2a219ef0c9aa522f4d7e55389de631d" // Use API key
-
+var CITY: String? = ""
 
 @Suppress("DEPRECATION")
 class HomeFragment : Fragment() {
@@ -40,13 +40,13 @@ class HomeFragment : Fragment() {
     private lateinit var errorTextTextView: TextView
     private lateinit var laterTime3TextView: TextView
     private lateinit var laterTemp3TextView: TextView
-    var CITY: String? = ""
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         Log.d(TAG, "onCreateView: start")
         homeViewModel = ViewModelProviders.of(this).get(HomeViewModel::class.java)
         val view = inflater.inflate(R.layout.fragment_home, container, false)
 
+        //設定フラグメントからデータの受け取り
         CITY = arguments?.getString("PostCode")
         CITY = "$CITY,jp"
 
