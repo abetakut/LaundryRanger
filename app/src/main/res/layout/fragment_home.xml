@@ -31,15 +31,15 @@
                     android:id="@+id/address"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="City Name"
+                    android:text="住所を設定してください"
                     android:textSize="18sp" />
 
-                <!--                <TextView-->
-                <!--                    android:id="@+id/updated_at"-->
-                <!--                    android:layout_width="wrap_content"-->
-                <!--                    android:layout_height="wrap_content"-->
-                <!--                    android:text="update time"-->
-                <!--                    android:textSize="14sp" />-->
+                <TextView
+                    android:id="@+id/updated_at"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="update time"
+                    android:textSize="14sp" />
             </LinearLayout>
 
             <LinearLayout
@@ -55,7 +55,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:text="weathe status"
+                    android:text="@string/unknown"
                     android:textSize="25sp" />
 
                 <!--TODO:天気予報にあわせてセンタくんの画像に変換する。複数の画像差し替え可能か？-->
@@ -63,23 +63,22 @@
                     android:id="@+id/sentakun_image"
                     android:layout_width="300sp"
                     android:layout_height="300sp"
-                    android:padding="5sp"
                     android:layout_gravity="center"
+                    android:padding="5sp"
                     android:src="@drawable/kaden_sentakuki" />
 
                 <LinearLayout
                     android:id="@+id/currentContainer"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/sentakun_image"
                     android:orientation="horizontal"
                     android:weightSum="5">
 
                     <ImageView
                         android:layout_width="25sp"
                         android:layout_height="25sp"
-                        android:layout_weight="2"
                         android:layout_gravity="center_vertical"
+                        android:layout_weight="2"
                         android:src="@drawable/weather"
                         app:tint="#000000" />
 
@@ -89,10 +88,10 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:gravity="center_horizontal"
                         android:layout_weight="3"
                         android:fontFamily="sans-serif-thin"
-                        android:text="20.0C"
+                        android:gravity="center_horizontal"
+                        android:text="--℃"
                         android:textSize="60sp" />
                 </LinearLayout>
 
@@ -100,14 +99,14 @@
                     android:id="@+id/detailsContainer"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentBottom="true"
                     android:orientation="vertical">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
-                        android:weightSum="4">
+                        android:weightSum="4"
+                        android:baselineAligned="false">
 
                         <LinearLayout
                             android:layout_width="0dp"
@@ -135,7 +134,7 @@
                                 android:id="@+id/laterTemp3"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="temp"
+                                android:text="@string/unknown"
                                 android:textSize="14sp" />
                         </LinearLayout>
 
@@ -165,7 +164,7 @@
                                 android:id="@+id/laterTemp6"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="temp"
+                                android:text="@string/unknown"
                                 android:textSize="14sp" />
                         </LinearLayout>
 
@@ -195,7 +194,7 @@
                                 android:id="@+id/laterTemp9"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="temp"
+                                android:text="@string/unknown"
                                 android:textSize="14sp" />
                         </LinearLayout>
 
@@ -225,7 +224,7 @@
                                 android:id="@+id/laterTemp12"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="temp"
+                                android:text="@string/unknown"
                                 android:textSize="14sp" />
                         </LinearLayout>
 
@@ -263,7 +262,7 @@
                                 android:id="@+id/laterTemp15"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="temp"
+                                android:text="@string/unknown"
                                 android:textSize="14sp" />
                         </LinearLayout>
 
@@ -293,7 +292,7 @@
                                 android:id="@+id/laterTemp18"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="temp"
+                                android:text="@string/unknown"
                                 android:textSize="14sp" />
                         </LinearLayout>
 
@@ -323,7 +322,7 @@
                                 android:id="@+id/laterTemp21"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="temp"
+                                android:text="@string/unknown"
                                 android:textSize="14sp" />
                         </LinearLayout>
 
@@ -353,7 +352,7 @@
                                 android:id="@+id/laterTemp24"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="temp"
+                                android:text="@string/unknown"
                                 android:textSize="14sp" />
                         </LinearLayout>
 

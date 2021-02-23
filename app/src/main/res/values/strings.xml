@@ -6,4 +6,5 @@
     <string name="title_chat">chat</string>
     <string name="title_setting">setting</string>
     <string name="goHome">go home</string>
+    <string name="unknown">--</string>
 </resources>

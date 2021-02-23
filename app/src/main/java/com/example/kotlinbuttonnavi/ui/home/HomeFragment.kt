@@ -1,5 +1,7 @@
 package com.example.kotlinbuttonnavi.ui.home
 
+import android.content.Context
+import android.content.SharedPreferences
 import android.os.AsyncTask
 import android.os.Bundle
 import android.util.Log
@@ -29,6 +31,7 @@ class HomeFragment : Fragment() {
     //変数の初期化
     private lateinit var homeViewModel: HomeViewModel
     private lateinit var addressTextView: TextView
+    private lateinit var updatedAtText: TextView
     private lateinit var statusTextView: TextView
     private lateinit var tempTextView: TextView
     private lateinit var tempMin: TextView
@@ -47,7 +50,9 @@ class HomeFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_home, container, false)
 
         //設定フラグメントからデータの受け取り
-        CITY = arguments?.getString("PostCode")
+        val dataStore: SharedPreferences = this.requireActivity().getSharedPreferences("DataStore", Context.MODE_PRIVATE)
+        val str = dataStore.getString("Input", "675-0011")
+        CITY = str
         CITY = "$CITY,jp"
 
         //APIでJSON取得＆加工
@@ -66,6 +71,7 @@ class HomeFragment : Fragment() {
         Log.d(TAG, "onViewCreated: set variable")
 
         addressTextView = view.findViewById(R.id.address)
+        updatedAtText = view.findViewById(R.id.updated_at)
         statusTextView = view.findViewById(R.id.status)
         tempTextView = view.findViewById(R.id.temp)
         loaderProgressBar = view.findViewById(R.id.loader)
@@ -130,10 +136,7 @@ class HomeFragment : Fragment() {
                 Log.d(TAG, "onPostExecute: weather = $weather")
                 val updatedAt: Long = jsonObj.getLong("dt")
                 // アップデート時間いる？
-                val updatedAtText =
-                    "Updated at: " + SimpleDateFormat("dd/MM/yyyy hh:mm a", Locale.ENGLISH).format(
-                        Date(updatedAt * 1000)
-                    )
+                val updatedAtTime = "Updated at: " + SimpleDateFormat("dd/MM/yyyy hh:mm a", Locale.ENGLISH).format(Date(updatedAt * 1000))
                 val temp = main.getString("temp") + "°C"
                 Log.d(TAG, "onPostExecute: temp = $temp")
                 val tempMin = "Min Temp: " + main.getString("temp_min") + "°C"
@@ -146,6 +149,7 @@ class HomeFragment : Fragment() {
 
                 /* Populating extracted data into our views */
                 addressTextView.text = address
+                updatedAtText.text = updatedAtTime
                 statusTextView.text = weatherDescription.capitalize()
                 tempTextView.text = temp
 
