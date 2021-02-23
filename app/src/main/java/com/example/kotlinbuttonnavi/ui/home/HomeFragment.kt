@@ -36,6 +36,7 @@ class HomeFragment : Fragment() {
     //変数の初期化
     private lateinit var homeViewModel: HomeViewModel
     private lateinit var homeImage: ImageView
+    private lateinit var weatherImage: ImageView
     private lateinit var addressTextView: TextView
     private lateinit var updatedAtText: TextView
     private lateinit var statusTextView: TextView
@@ -48,21 +49,29 @@ class HomeFragment : Fragment() {
     private lateinit var mainContainerRelativeLayout: RelativeLayout
     private lateinit var errorTextTextView: TextView
     private lateinit var laterTime3TextView: TextView
-    private lateinit var laterTemp3TextView: TextView
     private lateinit var laterTime6TextView: TextView
-    private lateinit var laterTemp6TextView: TextView
     private lateinit var laterTime9TextView: TextView
-    private lateinit var laterTemp9TextView: TextView
     private lateinit var laterTime12TextView: TextView
-    private lateinit var laterTemp12TextView: TextView
     private lateinit var laterTime15TextView: TextView
-    private lateinit var laterTemp15TextView: TextView
     private lateinit var laterTime18TextView: TextView
-    private lateinit var laterTemp18TextView: TextView
     private lateinit var laterTime21TextView: TextView
-    private lateinit var laterTemp21TextView: TextView
     private lateinit var laterTime24TextView: TextView
+    private lateinit var laterTemp3TextView: TextView
+    private lateinit var laterTemp6TextView: TextView
+    private lateinit var laterTemp9TextView: TextView
+    private lateinit var laterTemp12TextView: TextView
+    private lateinit var laterTemp15TextView: TextView
+    private lateinit var laterTemp18TextView: TextView
+    private lateinit var laterTemp21TextView: TextView
     private lateinit var laterTemp24TextView: TextView
+    private lateinit var laterImage3ImageView: ImageView
+    private lateinit var laterImage6ImageView: ImageView
+    private lateinit var laterImage9ImageView: ImageView
+    private lateinit var laterImage12ImageView: ImageView
+    private lateinit var laterImage15ImageView: ImageView
+    private lateinit var laterImage18ImageView: ImageView
+    private lateinit var laterImage21ImageView: ImageView
+    private lateinit var laterImage24ImageView: ImageView
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         Log.d(TAG, "onCreateView: start")
@@ -82,7 +91,7 @@ class HomeFragment : Fragment() {
         //5 day weather forecast
         fiveDaysWeatherTask().execute()
         //画像取得設定
-        getImageTask().execute()
+//        getImageTask().execute()
 
         Log.d(TAG, "onCreateView: end")
         return view
@@ -102,23 +111,54 @@ class HomeFragment : Fragment() {
         mainContainerRelativeLayout = view.findViewById(R.id.mainContainer)
         errorTextTextView = view.findViewById(R.id.errorText)
         laterTime3TextView = view.findViewById(R.id.laterTime3)
-        laterTemp3TextView = view.findViewById(R.id.laterTemp3)
         laterTime6TextView = view.findViewById(R.id.laterTime6)
-        laterTemp6TextView = view.findViewById(R.id.laterTemp6)
         laterTime9TextView = view.findViewById(R.id.laterTime9)
-        laterTemp9TextView = view.findViewById(R.id.laterTemp9)
         laterTime12TextView = view.findViewById(R.id.laterTime12)
-        laterTemp12TextView = view.findViewById(R.id.laterTemp12)
         laterTime15TextView = view.findViewById(R.id.laterTime15)
-        laterTemp15TextView = view.findViewById(R.id.laterTemp15)
         laterTime18TextView = view.findViewById(R.id.laterTime18)
-        laterTemp18TextView = view.findViewById(R.id.laterTemp18)
         laterTime21TextView = view.findViewById(R.id.laterTime21)
-        laterTemp21TextView = view.findViewById(R.id.laterTemp21)
         laterTime24TextView = view.findViewById(R.id.laterTime24)
+        laterTemp3TextView = view.findViewById(R.id.laterTemp3)
+        laterTemp6TextView = view.findViewById(R.id.laterTemp6)
+        laterTemp9TextView = view.findViewById(R.id.laterTemp9)
+        laterTemp12TextView = view.findViewById(R.id.laterTemp12)
+        laterTemp15TextView = view.findViewById(R.id.laterTemp15)
+        laterTemp18TextView = view.findViewById(R.id.laterTemp18)
+        laterTemp21TextView = view.findViewById(R.id.laterTemp21)
         laterTemp24TextView = view.findViewById(R.id.laterTemp24)
+        laterImage3ImageView = view.findViewById(R.id.laterImage3)
+        laterImage6ImageView = view.findViewById(R.id.laterImage6)
+        laterImage9ImageView = view.findViewById(R.id.laterImage9)
+        laterImage12ImageView = view.findViewById(R.id.laterImage12)
+        laterImage15ImageView = view.findViewById(R.id.laterImage15)
+        laterImage18ImageView = view.findViewById(R.id.laterImage18)
+        laterImage21ImageView = view.findViewById(R.id.laterImage21)
+        laterImage24ImageView = view.findViewById(R.id.laterImage24)
 
         Log.d(TAG, "onViewCreated: end")
+    }
+
+    fun setImage(string: String, imageView: ImageView){
+        when(string){
+            "01d" -> imageView.setImageResource(R.drawable.icon_01d)
+            "01n" -> imageView.setImageResource(R.drawable.icon_01n)
+            "02d" -> imageView.setImageResource(R.drawable.icon_02d)
+            "02n" -> imageView.setImageResource(R.drawable.icon_02n)
+            "03d" -> imageView.setImageResource(R.drawable.icon_03d)
+            "03n" -> imageView.setImageResource(R.drawable.icon_03n)
+            "04d" -> imageView.setImageResource(R.drawable.icon_04d)
+            "04n" -> imageView.setImageResource(R.drawable.icon_04n)
+            "09d" -> imageView.setImageResource(R.drawable.icon_09d)
+            "09n" -> imageView.setImageResource(R.drawable.icon_09n)
+            "10d" -> imageView.setImageResource(R.drawable.icon_10d)
+            "10n" -> imageView.setImageResource(R.drawable.icon_10n)
+            "11d" -> imageView.setImageResource(R.drawable.icon_11d)
+            "11n" -> imageView.setImageResource(R.drawable.icon_11n)
+            "13d" -> imageView.setImageResource(R.drawable.icon_13d)
+            "13n" -> imageView.setImageResource(R.drawable.icon_13n)
+            "50d" -> imageView.setImageResource(R.drawable.icon_50d)
+            "50n" -> imageView.setImageResource(R.drawable.icon_50n)
+        }
     }
 
     //Current weather
@@ -172,7 +212,7 @@ class HomeFragment : Fragment() {
                 val updatedAt: Long = jsonObj.getLong("dt")
                 //画像icon id
                 val weatherIcon = weather.getString("icon")
-                ICON = weatherIcon.toString()
+//                ICON = weatherIcon.toString()
                 Log.d(TAG, "onPostExecute: weatherIcon = $weatherIcon")
                 // アップデート時間いる？
                 val updatedAtTime = "Updated at: " + SimpleDateFormat("dd/MM/yyyy hh:mm a", Locale.ENGLISH).format(Date(updatedAt * 1000))
@@ -189,6 +229,7 @@ class HomeFragment : Fragment() {
                 /* Populating extracted data into our views */
                 addressTextView.text = address
                 updatedAtText.text = updatedAtTime
+                setImage(weatherIcon, homeImage)
                 statusTextView.text = weatherDescription.capitalize()
                 tempTextView.text = temp
 
@@ -268,11 +309,25 @@ class HomeFragment : Fragment() {
                     laterTemp24TextView
                 )
 
+                val iconListArray = arrayOf(
+                    laterImage3ImageView,
+                    laterImage6ImageView,
+                    laterImage9ImageView,
+                    laterImage12ImageView,
+                    laterImage15ImageView,
+                    laterImage18ImageView,
+                    laterImage21ImageView,
+                    laterImage24ImageView
+                )
+
                 var listToday: JSONObject
                 var main: JSONObject
                 var updatedAt: Long
                 var updatedAtText: String
                 var temp: String
+                var weather: JSONObject
+                //画像icon id
+                var weatherIcon: String
 
                 //3時間おきの時間と気温の取得と反映
                 for (i in timeListArray.indices) {
@@ -282,8 +337,15 @@ class HomeFragment : Fragment() {
                     main = listToday.getJSONObject("main")
                     updatedAt = listToday.getLong("dt")
                     updatedAtText = SimpleDateFormat("hh:mm a", Locale.ENGLISH).format(Date(updatedAt * 1000)); temp = main.getString("temp") + "°C"
+                    Log.d(TAG, "onPostExecute: check")
                     timeListArray[i].text = updatedAtText
                     Log.d(TAG, "onPostExecute: list( $i ) time = $updatedAtText")
+
+                    weather = listToday.getJSONArray("weather").getJSONObject(0)
+                    weatherIcon = weather.getString("icon")
+                    Log.d(TAG, "onPostExecute: weatherIcon = $weatherIcon")
+                    //画像のあてはめ
+                    setImage(weatherIcon, iconListArray[i])
                     tempListArray[i].text = temp
                     Log.d(TAG, "onPostExecute: list( $i ) temp = $temp")
                 }

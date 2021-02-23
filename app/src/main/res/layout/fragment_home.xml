@@ -61,8 +61,8 @@
                 <!--TODO:天気予報にあわせてセンタくんの画像に変換する。複数の画像差し替え可能か？-->
                 <ImageView
                     android:id="@+id/sentakun_image"
-                    android:layout_width="300sp"
-                    android:layout_height="300sp"
+                    android:layout_width="250sp"
+                    android:layout_height="250sp"
                     android:layout_gravity="center"
                     android:padding="5sp"
                     android:src="@drawable/kaden_sentakuki" />
@@ -104,9 +104,9 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:baselineAligned="false"
                         android:orientation="horizontal"
-                        android:weightSum="4"
-                        android:baselineAligned="false">
+                        android:weightSum="4">
 
                         <LinearLayout
                             android:layout_width="0dp"
@@ -125,10 +125,10 @@
                                 android:textSize="12sp" />
 
                             <ImageView
+                                android:id="@+id/laterImage3"
                                 android:layout_width="25dp"
                                 android:layout_height="25dp"
-                                android:src="@drawable/sunrise"
-                                app:tint="#000000" />
+                                android:src="@drawable/ic_baseline_help_outline_24" />
 
                             <TextView
                                 android:id="@+id/laterTemp3"
@@ -155,10 +155,10 @@
                                 android:textSize="12sp" />
 
                             <ImageView
+                                android:id="@+id/laterImage6"
                                 android:layout_width="25dp"
                                 android:layout_height="25dp"
-                                android:src="@drawable/sunrise"
-                                app:tint="#000000" />
+                                android:src="@drawable/ic_baseline_help_outline_24" />
 
                             <TextView
                                 android:id="@+id/laterTemp6"
@@ -185,10 +185,10 @@
                                 android:textSize="12sp" />
 
                             <ImageView
+                                android:id="@+id/laterImage9"
                                 android:layout_width="25dp"
                                 android:layout_height="25dp"
-                                android:src="@drawable/sunrise"
-                                app:tint="#000000" />
+                                android:src="@drawable/ic_baseline_help_outline_24" />
 
                             <TextView
                                 android:id="@+id/laterTemp9"
@@ -215,10 +215,10 @@
                                 android:textSize="12sp" />
 
                             <ImageView
+                                android:id="@+id/laterImage12"
                                 android:layout_width="25dp"
                                 android:layout_height="25dp"
-                                android:src="@drawable/sunrise"
-                                app:tint="#000000" />
+                                android:src="@drawable/ic_baseline_help_outline_24" />
 
                             <TextView
                                 android:id="@+id/laterTemp12"
@@ -253,10 +253,10 @@
                                 android:textSize="12sp" />
 
                             <ImageView
+                                android:id="@+id/laterImage15"
                                 android:layout_width="25dp"
                                 android:layout_height="25dp"
-                                android:src="@drawable/sunrise"
-                                app:tint="#000000" />
+                                android:src="@drawable/ic_baseline_help_outline_24" />
 
                             <TextView
                                 android:id="@+id/laterTemp15"
@@ -283,10 +283,10 @@
                                 android:textSize="12sp" />
 
                             <ImageView
+                                android:id="@+id/laterImage18"
                                 android:layout_width="25dp"
                                 android:layout_height="25dp"
-                                android:src="@drawable/sunrise"
-                                app:tint="#000000" />
+                                android:src="@drawable/ic_baseline_help_outline_24" />
 
                             <TextView
                                 android:id="@+id/laterTemp18"
@@ -309,14 +309,14 @@
                                 android:id="@+id/laterTime21"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="21hour"
+                                android:text="@string/unknown"
                                 android:textSize="12sp" />
 
                             <ImageView
+                                android:id="@+id/laterImage21"
                                 android:layout_width="25dp"
                                 android:layout_height="25dp"
-                                android:src="@drawable/sunrise"
-                                app:tint="#000000" />
+                                android:src="@drawable/ic_baseline_help_outline_24" />
 
                             <TextView
                                 android:id="@+id/laterTemp21"
@@ -343,10 +343,10 @@
                                 android:textSize="12sp" />
 
                             <ImageView
+                                android:id="@+id/laterImage24"
                                 android:layout_width="25dp"
                                 android:layout_height="25dp"
-                                android:src="@drawable/sunrise"
-                                app:tint="#000000" />
+                                android:src="@drawable/ic_baseline_help_outline_24" />
 
                             <TextView
                                 android:id="@+id/laterTemp24"
