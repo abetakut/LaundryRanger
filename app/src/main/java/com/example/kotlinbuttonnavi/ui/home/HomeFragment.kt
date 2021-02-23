@@ -35,8 +35,9 @@ class HomeFragment : Fragment() {
 
     //変数の初期化
     private lateinit var homeViewModel: HomeViewModel
+    private lateinit var recommendTalk: TextView
     private lateinit var homeImage: ImageView
-    private lateinit var weatherImage: ImageView
+    private lateinit var currentIcon: ImageView
     private lateinit var addressTextView: TextView
     private lateinit var updatedAtText: TextView
     private lateinit var statusTextView: TextView
@@ -44,7 +45,6 @@ class HomeFragment : Fragment() {
     private lateinit var tempMin: TextView
     private lateinit var tempMax: TextView
     private lateinit var windSpeed: TextView
-
     private lateinit var loaderProgressBar: ProgressBar
     private lateinit var mainContainerRelativeLayout: RelativeLayout
     private lateinit var errorTextTextView: TextView
@@ -103,8 +103,10 @@ class HomeFragment : Fragment() {
         Log.d(TAG, "onViewCreated: set variable")
 
         addressTextView = view.findViewById(R.id.address)
+        recommendTalk = view.findViewById(R.id.recommendText)
         updatedAtText = view.findViewById(R.id.updated_at)
         homeImage = view.findViewById(R.id.sentakun_image)
+        currentIcon = view.findViewById(R.id.currentWeatherIcon)
         statusTextView = view.findViewById(R.id.status)
         tempTextView = view.findViewById(R.id.temp)
         loaderProgressBar = view.findViewById(R.id.loader)
@@ -138,8 +140,10 @@ class HomeFragment : Fragment() {
         Log.d(TAG, "onViewCreated: end")
     }
 
-    fun setImage(string: String, imageView: ImageView){
-        when(string){
+    fun setImage(string: String, imageView: ImageView): Int {
+        Log.d(TAG, "setImage: start")
+        var wetherFlag: Int = 0
+        when (string) {
             "01d" -> imageView.setImageResource(R.drawable.icon_01d)
             "01n" -> imageView.setImageResource(R.drawable.icon_01n)
             "02d" -> imageView.setImageResource(R.drawable.icon_02d)
@@ -148,17 +152,53 @@ class HomeFragment : Fragment() {
             "03n" -> imageView.setImageResource(R.drawable.icon_03n)
             "04d" -> imageView.setImageResource(R.drawable.icon_04d)
             "04n" -> imageView.setImageResource(R.drawable.icon_04n)
-            "09d" -> imageView.setImageResource(R.drawable.icon_09d)
-            "09n" -> imageView.setImageResource(R.drawable.icon_09n)
-            "10d" -> imageView.setImageResource(R.drawable.icon_10d)
-            "10n" -> imageView.setImageResource(R.drawable.icon_10n)
-            "11d" -> imageView.setImageResource(R.drawable.icon_11d)
-            "11n" -> imageView.setImageResource(R.drawable.icon_11n)
-            "13d" -> imageView.setImageResource(R.drawable.icon_13d)
-            "13n" -> imageView.setImageResource(R.drawable.icon_13n)
-            "50d" -> imageView.setImageResource(R.drawable.icon_50d)
-            "50n" -> imageView.setImageResource(R.drawable.icon_50n)
+
+            "09d" -> {
+                imageView.setImageResource(R.drawable.icon_09d)
+                wetherFlag++
+            }
+            "09n" -> {
+                imageView.setImageResource(R.drawable.icon_09n)
+                wetherFlag++
+            }
+            "10d" -> {
+                imageView.setImageResource(R.drawable.icon_10d)
+                wetherFlag++
+            }
+            "10n" -> {
+                imageView.setImageResource(R.drawable.icon_10n)
+                wetherFlag++
+            }
+            //thunderstorm
+            "11d" -> {
+                imageView.setImageResource(R.drawable.icon_11d)
+                wetherFlag++
+            }
+            "11n" -> {
+                imageView.setImageResource(R.drawable.icon_11n)
+                wetherFlag++
+            }
+            //snow
+            "13d" -> {
+                imageView.setImageResource(R.drawable.icon_13d)
+                wetherFlag += 13
+            }
+            "13n" -> {
+                imageView.setImageResource(R.drawable.icon_13n)
+                wetherFlag += 13
+            }
+            //mist
+            "50d" -> {
+                imageView.setImageResource(R.drawable.icon_50d)
+                wetherFlag++
+            }
+            "50n" -> {
+                imageView.setImageResource(R.drawable.icon_50n)
+                wetherFlag++
+            }
         }
+        Log.d(TAG, "setImage: wetherFlag = $wetherFlag :end")
+        return wetherFlag
     }
 
     //Current weather
@@ -179,7 +219,9 @@ class HomeFragment : Fragment() {
 //                TODO:言語設定もそのうちユーザーが選択できるようにしたい
                 response =
                         //Current weather
-                    URL("https://api.openweathermap.org/data/2.5/weather?q=$CITY&units=metric&lang=$LANG&appid=$API").readText(Charsets.UTF_8)
+                    URL("https://api.openweathermap.org/data/2.5/weather?q=$CITY&units=metric&lang=$LANG&appid=$API").readText(
+                        Charsets.UTF_8
+                    )
             } catch (e: Exception) {
                 response = null
             }
@@ -215,7 +257,10 @@ class HomeFragment : Fragment() {
 //                ICON = weatherIcon.toString()
                 Log.d(TAG, "onPostExecute: weatherIcon = $weatherIcon")
                 // アップデート時間いる？
-                val updatedAtTime = "Updated at: " + SimpleDateFormat("dd/MM/yyyy hh:mm a", Locale.ENGLISH).format(Date(updatedAt * 1000))
+                val updatedAtTime = "更新時刻：\n" + SimpleDateFormat(
+                    "M/d k:m",
+                    Locale.ENGLISH
+                ).format(Date(updatedAt * 1000))
                 val temp = main.getString("temp") + "°C"
                 Log.d(TAG, "onPostExecute: temp = $temp")
                 val tempMin = "Min Temp: " + main.getString("temp_min") + "°C"
@@ -224,12 +269,12 @@ class HomeFragment : Fragment() {
                 val sunset: Long = sys.getLong("sunset")
                 val windSpeed = wind.getString("speed")
                 val weatherDescription = weather.getString("description")
-                val address = jsonObj.getString("name") + ", " + sys.getString("country")
+                val address = jsonObj.getString("name")
 
                 /* Populating extracted data into our views */
                 addressTextView.text = address
                 updatedAtText.text = updatedAtTime
-                setImage(weatherIcon, homeImage)
+                setImage(weatherIcon, currentIcon)
                 statusTextView.text = weatherDescription.capitalize()
                 tempTextView.text = temp
 
@@ -263,8 +308,8 @@ class HomeFragment : Fragment() {
             try {
 //                TODO:言語設定もそのうちユーザーが選択できるようにしたい
                 response =
-                        //5 day weather forecast
-                    URL("https://api.openweathermap.org/data/2.5/forecast?q=$CITY&units=metric&lang=ja&appid=$API").readText(
+                        //5 day weather forecast each 3 hour
+                    URL("https://api.openweathermap.org/data/2.5/forecast?q=$CITY&units=metric&lang=$LANG&appid=$API").readText(
                         Charsets.UTF_8
                     )
             } catch (e: Exception) {
@@ -328,6 +373,7 @@ class HomeFragment : Fragment() {
                 var weather: JSONObject
                 //画像icon id
                 var weatherIcon: String
+                var weatherCheck = IntArray(8)
 
                 //3時間おきの時間と気温の取得と反映
                 for (i in timeListArray.indices) {
@@ -336,20 +382,43 @@ class HomeFragment : Fragment() {
                     Log.d(TAG, "onPostExecute: list getJSONObject( $i )")
                     main = listToday.getJSONObject("main")
                     updatedAt = listToday.getLong("dt")
-                    updatedAtText = SimpleDateFormat("hh:mm a", Locale.ENGLISH).format(Date(updatedAt * 1000)); temp = main.getString("temp") + "°C"
+                    updatedAtText =
+                        SimpleDateFormat("k:mm", Locale.ENGLISH).format(Date(updatedAt * 1000));
+                    temp = main.getString("temp") + "°C"
                     Log.d(TAG, "onPostExecute: check")
                     timeListArray[i].text = updatedAtText
                     Log.d(TAG, "onPostExecute: list( $i ) time = $updatedAtText")
-
                     weather = listToday.getJSONArray("weather").getJSONObject(0)
                     weatherIcon = weather.getString("icon")
                     Log.d(TAG, "onPostExecute: weatherIcon = $weatherIcon")
                     //画像のあてはめ
-                    setImage(weatherIcon, iconListArray[i])
+                    weatherCheck[i] = setImage(weatherIcon, iconListArray[i])
                     tempListArray[i].text = temp
                     Log.d(TAG, "onPostExecute: list( $i ) temp = $temp")
                 }
 
+                when {
+                    //直近が雨
+                    weatherCheck[0] == 1 -> {
+                        recommendTalk.text = "雨やなぁ、休もっか"
+                    }
+                    //雪のとき
+                    weatherCheck[0] == 13 -> {
+                        recommendTalk.text = "雪かぁ、休もっか"
+                    }
+                    //24時間雨じゃない
+                    weatherCheck.sum() == 0 -> {
+                        recommendTalk.text = "洗濯物干しどきやね"
+                    }
+                    //雪のとき
+                    weatherCheck.sum() > 13 -> {
+                        recommendTalk.text = "雪降りそう、また今度にしよか"
+                    }
+                    //すぐじゃないけど雨予報
+                    else -> {
+                        recommendTalk.text = "雨降りそう、また今度にしよか"
+                    }
+                }
                 /* Views populated, Hiding the loader, Showing the main design */
                 loaderProgressBar.visibility = View.GONE
                 mainContainerRelativeLayout.visibility = View.VISIBLE
@@ -381,7 +450,7 @@ class HomeFragment : Fragment() {
 
         }
 
-        override fun onPostExecute(result: String?){
+        override fun onPostExecute(result: String?) {
             Log.d(TAG, "onPostExecute: start")
 
             //画像の設定
@@ -392,4 +461,4 @@ class HomeFragment : Fragment() {
         }
     }
 
-    }
+}
