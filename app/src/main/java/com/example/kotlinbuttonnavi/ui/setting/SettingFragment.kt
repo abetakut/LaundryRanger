@@ -24,20 +24,12 @@ class SettingFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
         Log.d(TAG, "onCreateView: start")
-        settingViewModel = ViewModelProviders.of(this).get(SettingViewModel::class.java)
         val view = inflater.inflate(R.layout.fragment_setting, container, false)
-        val textView: TextView = view.findViewById(R.id.text_setting)
-        settingViewModel.text.observe(viewLifecycleOwner, Observer {
-            textView.text = it
-        })
-
         val dataStore: SharedPreferences = this.requireActivity().getSharedPreferences("DataStore", Context.MODE_PRIVATE)
 
-        //ToDo:設定画面で都市設定
-        //ToDo:文字入力完了ボタンをGboardに設定
         view.button_setCity.setOnClickListener{
             Log.d(TAG, "onCreateView: button click")
-            //設定postcodeデータの保存
+            //設定PostCodeデータの保存
             val stringText = editText_City.text.toString()
             val editor = dataStore.edit()
             editor.putString("Input",stringText)

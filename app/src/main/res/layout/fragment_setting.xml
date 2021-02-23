@@ -74,7 +74,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="50sp"
                     android:layout_weight="4"
-                    android:autofillHints="123-4567"
+                    android:hint="123-4567"
                     android:imeOptions="actionDone"
                     android:inputType="text" />
 

@@ -19,10 +19,12 @@ import org.json.JSONObject
 import java.net.URL
 import java.text.SimpleDateFormat
 import java.util.*
+
 val LAT: String = "35.689889"
 val LON: String = "139.847066"
 val API: String = "c2a219ef0c9aa522f4d7e55389de631d" // Use API key
 var CITY: String? = ""
+var LANG: String? = "ja"
 
 @Suppress("DEPRECATION")
 class HomeFragment : Fragment() {
@@ -43,6 +45,20 @@ class HomeFragment : Fragment() {
     private lateinit var errorTextTextView: TextView
     private lateinit var laterTime3TextView: TextView
     private lateinit var laterTemp3TextView: TextView
+    private lateinit var laterTime6TextView: TextView
+    private lateinit var laterTemp6TextView: TextView
+    private lateinit var laterTime9TextView: TextView
+    private lateinit var laterTemp9TextView: TextView
+    private lateinit var laterTime12TextView: TextView
+    private lateinit var laterTemp12TextView: TextView
+    private lateinit var laterTime15TextView: TextView
+    private lateinit var laterTemp15TextView: TextView
+    private lateinit var laterTime18TextView: TextView
+    private lateinit var laterTemp18TextView: TextView
+    private lateinit var laterTime21TextView: TextView
+    private lateinit var laterTemp21TextView: TextView
+    private lateinit var laterTime24TextView: TextView
+    private lateinit var laterTemp24TextView: TextView
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         Log.d(TAG, "onCreateView: start")
@@ -54,6 +70,7 @@ class HomeFragment : Fragment() {
         val str = dataStore.getString("Input", "675-0011")
         CITY = str
         CITY = "$CITY,jp"
+        Log.d(TAG, "onCreateView: CITY = $CITY")
 
         //APIでJSON取得＆加工
         //Current weather
@@ -79,6 +96,20 @@ class HomeFragment : Fragment() {
         errorTextTextView = view.findViewById(R.id.errorText)
         laterTime3TextView = view.findViewById(R.id.laterTime3)
         laterTemp3TextView = view.findViewById(R.id.laterTemp3)
+        laterTime6TextView = view.findViewById(R.id.laterTime6)
+        laterTemp6TextView = view.findViewById(R.id.laterTemp6)
+        laterTime9TextView = view.findViewById(R.id.laterTime9)
+        laterTemp9TextView = view.findViewById(R.id.laterTemp9)
+        laterTime12TextView = view.findViewById(R.id.laterTime12)
+        laterTemp12TextView = view.findViewById(R.id.laterTemp12)
+        laterTime15TextView = view.findViewById(R.id.laterTime15)
+        laterTemp15TextView = view.findViewById(R.id.laterTemp15)
+        laterTime18TextView = view.findViewById(R.id.laterTime18)
+        laterTemp18TextView = view.findViewById(R.id.laterTemp18)
+        laterTime21TextView = view.findViewById(R.id.laterTime21)
+        laterTemp21TextView = view.findViewById(R.id.laterTemp21)
+        laterTime24TextView = view.findViewById(R.id.laterTime24)
+        laterTemp24TextView = view.findViewById(R.id.laterTemp24)
 
         Log.d(TAG, "onViewCreated: end")
     }
@@ -91,7 +122,6 @@ class HomeFragment : Fragment() {
             super.onPreExecute()
             Log.d(TAG, "onPreExecute: start")
             /* Showing the ProgressBar, Making the main design GONE */
-            //onViewCreated()で宣言するようになった
             Log.d(TAG, "onPreExecute: end")
         }
 
@@ -102,7 +132,7 @@ class HomeFragment : Fragment() {
 //                TODO:言語設定もそのうちユーザーが選択できるようにしたい
                 response =
                         //Current weather
-                    URL("https://api.openweathermap.org/data/2.5/weather?q=$CITY&units=metric&lang=ja&appid=$API").readText(
+                    URL("https://api.openweathermap.org/data/2.5/weather?q=$CITY&units=metric&lang=$LANG&appid=$API").readText(
                         Charsets.UTF_8
                     )
             } catch (e: Exception) {
@@ -174,11 +204,9 @@ class HomeFragment : Fragment() {
             super.onPreExecute()
             Log.d(TAG, "onPreExecute: start")
             /* Showing the ProgressBar, Making the main design GONE */
-            //onViewCreated()で宣言するようになった
             Log.d(TAG, "onPreExecute: end")
         }
 
-        //        TODO:未来5日分のデータ欲しい
         override fun doInBackground(vararg params: String?): String? {
             Log.d(TAG, "doInBackground: start")
             var response: String?
@@ -209,47 +237,47 @@ class HomeFragment : Fragment() {
                     Log.d(TAG, "onPostExecute: jsonArray = null")
                 }
 
-                //当日天気
-                val listToday = jsonObj.getJSONArray("list").getJSONObject(1)
-                Log.d(TAG, "onPostExecute: listToday = $listToday")
-                val main = listToday.getJSONObject("main")
-                Log.d(TAG, "onPostExecute: main = $main")
-                val weather = listToday.getJSONArray("weather").getJSONObject(0)
-                Log.d(TAG, "onPostExecute: weather = $weather")
-                val wind = listToday.getJSONObject("wind")
-                Log.d(TAG, "onPostExecute: wind = $wind")
-                val city = jsonObj.getJSONObject("city")
-                Log.d(TAG, "onPostExecute: city = $city")
+                val timeListArray = arrayOf(
+                    laterTime3TextView,
+                    laterTime6TextView,
+                    laterTime9TextView,
+                    laterTime12TextView,
+                    laterTime15TextView,
+                    laterTime18TextView,
+                    laterTime21TextView,
+                    laterTime24TextView
+                )
 
-                val updatedAt: Long = listToday.getLong("dt")
-                val updatedAtText = SimpleDateFormat("hh:mm a", Locale.ENGLISH).format(Date(updatedAt * 1000))
-                val temp = main.getString("temp") + "°C"
-                Log.d(TAG, "onPostExecute: temp = $temp")
-                val tempMin = "Min Temp: " + main.getString("temp_min") + "°C"
-                Log.d(TAG, "onPostExecute: tempMin = $tempMin")
-                val tempMax = "Max Temp: " + main.getString("temp_max") + "°C"
-                Log.d(TAG, "onPostExecute: tempMax = $tempMax")
-                val sunrise: Long = city.getLong("sunrise")
-                val sunset: Long = city.getLong("sunset")
-                val windSpeed = wind.getString("speed")
-                val weatherDescription = weather.getString("description")
-                val address = city.getString("name") + ", " + city.getString("country")
+                val tempListArray = arrayOf(
+                    laterTemp3TextView,
+                    laterTemp6TextView,
+                    laterTemp9TextView,
+                    laterTemp12TextView,
+                    laterTemp15TextView,
+                    laterTemp18TextView,
+                    laterTemp21TextView,
+                    laterTemp24TextView
+                )
 
-                /* Populating extracted data into our views */
-                laterTime3TextView.text = updatedAtText
-                laterTemp3TextView.text = temp
-//                findViewById<TextView>(R.id.sunrise).text = SimpleDateFormat("hh:mm a", Locale.ENGLISH).format(Date(sunrise * 1000))
-//                findViewById<TextView>(R.id.sunset).text = SimpleDateFormat("hh:mm a", Locale.ENGLISH).format(Date(sunset * 1000))
+                var listToday: JSONObject
+                var main: JSONObject
+                var updatedAt: Long
+                var updatedAtText: String
+                var temp: String
 
-                //TODO:日数分取得してリストに入れたい
-//                if (jsonArray != null) {
-//                    for (i in 0 until jsonArray.length()) {
-//                        Log.d(TAG, "onPostExecute: i = $i")
-                //何個目のjsonデータか判別
-//                        val jsonObj = jsonArray.getJSONObject(i)
-
-//                    }
-//                }
+                //3時間おきの時間と気温の取得と反映
+                for (i in timeListArray.indices) {
+                    Log.d(TAG, "onPostExecute: for loop $i")
+                    listToday = jsonObj.getJSONArray("list").getJSONObject(i)
+                    Log.d(TAG, "onPostExecute: list getJSONObject( $i )")
+                    main = listToday.getJSONObject("main")
+                    updatedAt = listToday.getLong("dt")
+                    updatedAtText = SimpleDateFormat("hh:mm a", Locale.ENGLISH).format(Date(updatedAt * 1000)); temp = main.getString("temp") + "°C"
+                    timeListArray[i].text = updatedAtText
+                    Log.d(TAG, "onPostExecute: list( $i ) time = $updatedAtText")
+                    tempListArray[i].text = temp
+                    Log.d(TAG, "onPostExecute: list( $i ) temp = $temp")
+                }
 
                 /* Views populated, Hiding the loader, Showing the main design */
                 loaderProgressBar.visibility = View.GONE
@@ -279,7 +307,6 @@ class HomeFragment : Fragment() {
         override fun doInBackground(vararg params: String?): String? {
             var response: String?
             try {
-                //        TODO:未来5日分のデータ欲しい
 //                TODO:言語設定もそのうちユーザーが選択できるようにしたい
 //                TODO:現在地取得をユーザーで設定できるようにする
                 response =

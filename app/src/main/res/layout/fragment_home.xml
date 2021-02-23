@@ -359,7 +359,6 @@
                     </LinearLayout>
 
                 </LinearLayout>
-                <!--TODO:下の方に未来5日分の天気情報ざっくりでいいから表示させたい-->
             </LinearLayout>
 
         </RelativeLayout>

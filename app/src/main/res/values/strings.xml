@@ -4,7 +4,7 @@
     <string name="title_weather">weather</string>
     <string name="title_calender">calender</string>
     <string name="title_chat">chat</string>
-    <string name="title_setting">setting</string>
+    <string name="title_setting">設定</string>
     <string name="goHome">go home</string>
     <string name="unknown">--</string>
 </resources>
