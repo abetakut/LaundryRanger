@@ -8,12 +8,14 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import com.example.kotlinbuttonnavi.R
+import com.squareup.picasso.Picasso
 import org.json.JSONArray
 import org.json.JSONObject
 import java.net.URL
@@ -25,6 +27,7 @@ val LON: String = "139.847066"
 val API: String = "c2a219ef0c9aa522f4d7e55389de631d" // Use API key
 var CITY: String? = ""
 var LANG: String? = "ja"
+var ICON: String? = ""
 
 @Suppress("DEPRECATION")
 class HomeFragment : Fragment() {
@@ -32,6 +35,7 @@ class HomeFragment : Fragment() {
 
     //変数の初期化
     private lateinit var homeViewModel: HomeViewModel
+    private lateinit var homeImage: ImageView
     private lateinit var addressTextView: TextView
     private lateinit var updatedAtText: TextView
     private lateinit var statusTextView: TextView
@@ -77,6 +81,8 @@ class HomeFragment : Fragment() {
         weatherTask().execute()
         //5 day weather forecast
         fiveDaysWeatherTask().execute()
+        //画像取得設定
+        getImageTask().execute()
 
         Log.d(TAG, "onCreateView: end")
         return view
@@ -89,6 +95,7 @@ class HomeFragment : Fragment() {
 
         addressTextView = view.findViewById(R.id.address)
         updatedAtText = view.findViewById(R.id.updated_at)
+        homeImage = view.findViewById(R.id.sentakun_image)
         statusTextView = view.findViewById(R.id.status)
         tempTextView = view.findViewById(R.id.temp)
         loaderProgressBar = view.findViewById(R.id.loader)
@@ -132,9 +139,7 @@ class HomeFragment : Fragment() {
 //                TODO:言語設定もそのうちユーザーが選択できるようにしたい
                 response =
                         //Current weather
-                    URL("https://api.openweathermap.org/data/2.5/weather?q=$CITY&units=metric&lang=$LANG&appid=$API").readText(
-                        Charsets.UTF_8
-                    )
+                    URL("https://api.openweathermap.org/data/2.5/weather?q=$CITY&units=metric&lang=$LANG&appid=$API").readText(Charsets.UTF_8)
             } catch (e: Exception) {
                 response = null
             }
@@ -165,6 +170,10 @@ class HomeFragment : Fragment() {
                 val weather = jsonObj.getJSONArray("weather").getJSONObject(0)
                 Log.d(TAG, "onPostExecute: weather = $weather")
                 val updatedAt: Long = jsonObj.getLong("dt")
+                //画像icon id
+                val weatherIcon = weather.getString("icon")
+                ICON = weatherIcon.toString()
+                Log.d(TAG, "onPostExecute: weatherIcon = $weatherIcon")
                 // アップデート時間いる？
                 val updatedAtTime = "Updated at: " + SimpleDateFormat("dd/MM/yyyy hh:mm a", Locale.ENGLISH).format(Date(updatedAt * 1000))
                 val temp = main.getString("temp") + "°C"
@@ -292,109 +301,33 @@ class HomeFragment : Fragment() {
 
     }
 
-    //One Call API
-    //緯度経度で住所特定するからあまり使いたくない
-    inner class dailyWeatherTask() : AsyncTask<String, Void, String>() {
-
-        override fun onPreExecute() {
-            super.onPreExecute()
-            /* Showing the ProgressBar, Making the main design GONE */
-            loaderProgressBar.visibility = View.VISIBLE
-            mainContainerRelativeLayout.visibility = View.GONE
-            errorTextTextView.visibility = View.GONE
-        }
+    inner class getImageTask() : AsyncTask<String, Void, String>() {
+        private val TAG = "HomeFragment:getImageTask"
 
         override fun doInBackground(vararg params: String?): String? {
-            var response: String?
+            Log.d(TAG, "doInBackground: start")
+            var iconUrl: String?
             try {
-//                TODO:言語設定もそのうちユーザーが選択できるようにしたい
-//                TODO:現在地取得をユーザーで設定できるようにする
-                response =
-                        //One Call API
-                    URL("https://api.openweathermap.org/data/2.5/onecall?lat=$LAT&lon=$LON&exclude=daily&units=metric&lang=ja&appid=$API").readText(
-                        Charsets.UTF_8
-                    )
+                //天気アイコン画像取得URL
+                //ToDo:Picassoのライセンス記載
+                iconUrl = URL("http://openweathermap.org/img/w/$ICON.png").toString()
             } catch (e: Exception) {
-                response = null
+                iconUrl = null
             }
-            return response
-        }
-
-        override fun onPostExecute(result: String?) {
-            super.onPostExecute(result)
-            try {
-                /* Extracting JSON returns from the API */
-                val jsonObj = JSONObject(result)
-
-                //当日天気
-                val current = jsonObj.getJSONObject("current")
-                Log.d(TAG, "onPostExecute: current = $current")
-                val weather = current.getJSONArray("weather").getJSONObject(0)
-                Log.d(TAG, "onPostExecute: weather = $weather")
-                val temp = current.getString("temp") + "°C"
-                Log.d(TAG, "onPostExecute: temp = $temp")
-                val windSpeed = current.getString("wind_speed")
-                Log.d(TAG, "onPostExecute: windSpeed = $windSpeed")
-                val weatherDescription = weather.getString("description")
-                Log.d(TAG, "onPostExecute: weatherDescription = $weatherDescription")
-
-//                val jsonArray: JSONArray? = jsonObj.getJSONArray("daily")
-//                if (jsonArray != null) {
-//                    Log.d(TAG, "onPostExecute: jsonArray.length() = " + jsonArray.length())
-//                } else {
-//                    Log.d(TAG, "onPostExecute: jsonArray = null")
-//                }
-                //TODO:日数分取得してリストに入れたい
-//                if (jsonArray != null) {
-//                    for (i in 0 until jsonArray.length()) {
-//                        Log.d(TAG, "onPostExecute: i = $i")
-//                        //何個目のjsonデータか判別
-//                        val jsonObj = jsonArray.getJSONObject(i)
-//
-//                    }
-//                }
-
-//                val daily = jsonObj.getJSONObject("daily")
-//                Log.d(TAG, "onPostExecute: daily = $daily")
-//                val dailyTemp = daily.getJSONObject("temp")
-//                Log.d(TAG, "onPostExecute: dailyTemp = $dailyTemp")
-//                val tempMin = "Min Temp: " + dailyTemp.getString("min") + "°C"
-//                Log.d(TAG, "onPostExecute: tempMin = $tempMin")
-//                val tempMax = "Max Temp: " + dailyTemp.getString("max") + "°C"
-//                Log.d(TAG, "onPostExecute: tempMax = $tempMax")
-//                val sunrise: Long = daily.getLong("sunrise")
-//                Log.d(TAG, "onPostExecute: sunrise = $sunrise")
-//                val sunset: Long = daily.getLong("sunset")
-//                Log.d(TAG, "onPostExecute: sunset = $sunset")
-//                val address = jsonObj.getString("timezone")
-//                Log.d(TAG, "onPostExecute: address = $address")
-
-//                val wind = jsonObj.getJSONObject("wind")
-//                Log.d(TAG, "onPostExecute: wind = $wind")
-
-
-                /* Populating extracted data into our views */
-//                findViewById<TextView>(R.id.address).text = address
-                //                findViewById<TextView>(R.id.updated_at).text =  updatedAtText
-                statusTextView.text = weatherDescription.capitalize()
-                tempTextView.text = temp
-//                findViewById<TextView>(R.id.temp_min).text = tempMin
-//                findViewById<TextView>(R.id.temp_max).text = tempMax
-//                findViewById<TextView>(R.id.sunrise).text = SimpleDateFormat("hh:mm a", Locale.ENGLISH).format(Date(sunrise * 1000))
-//                findViewById<TextView>(R.id.sunset).text = SimpleDateFormat("hh:mm a", Locale.ENGLISH).format(Date(sunset * 1000))
-//                findViewById<TextView>(R.id.wind).text = windSpeed
-
-                /* Views populated, Hiding the loader, Showing the main design */
-//                findViewById<ProgressBar>(R.id.loader).visibility = View.GONE
-//                findViewById<RelativeLayout>(R.id.mainContainer).visibility = View.VISIBLE
-
-            } catch (e: Exception) {
-//                findViewById<ProgressBar>(R.id.loader).visibility = View.GONE
-//                findViewById<TextView>(R.id.errorText).visibility = View.VISIBLE
-            }
+            Log.d(TAG, "doInBackground: end")
+            return iconUrl
 
         }
 
+        override fun onPostExecute(result: String?){
+            Log.d(TAG, "onPostExecute: start")
+
+            //画像の設定
+            Picasso.get().load(result).into(homeImage)
+
+            Log.d(TAG, "onPostExecute: end")
+
+        }
     }
 
-}
+    }
