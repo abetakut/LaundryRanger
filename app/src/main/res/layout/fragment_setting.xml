@@ -1,35 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <RelativeLayout
         android:id="@+id/setting_relative"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_marginBottom="?attr/actionBarSize">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/text_setting"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginEnd="8dp"
-                    android:layout_weight="1"
-                    android:text="@string/title_setting"
-                    android:textAlignment="center"
-                    android:textSize="30sp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
                 android:id="@+id/setting_image"
@@ -38,7 +22,6 @@
                 android:layout_gravity="center"
                 android:src="@drawable/ic_round_location_on_24" />
 
-            <!--                ToDo:文字サイズの調整-->
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -50,7 +33,7 @@
                 android:id="@+id/setting_example"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="ex)\n郵便番号の場合：123-456\n市区町村の場合(英語)：sapporo"
+                android:text="例)\n郵便番号の場合：123-456\n市区町村の場合(英語)：sapporo"
                 android:textSize="15sp" />
 
 

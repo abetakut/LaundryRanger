@@ -15,19 +15,15 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import com.example.kotlinbuttonnavi.R
-import com.squareup.picasso.Picasso
 import org.json.JSONArray
 import org.json.JSONObject
 import java.net.URL
 import java.text.SimpleDateFormat
 import java.util.*
 
-val LAT: String = "35.689889"
-val LON: String = "139.847066"
 val API: String = "c2a219ef0c9aa522f4d7e55389de631d" // Use API key
 var CITY: String? = ""
 var LANG: String? = "ja"
-var ICON: String? = ""
 
 @Suppress("DEPRECATION")
 class HomeFragment : Fragment() {
@@ -90,8 +86,6 @@ class HomeFragment : Fragment() {
         weatherTask().execute()
         //5 day weather forecast
         fiveDaysWeatherTask().execute()
-        //画像取得設定
-//        getImageTask().execute()
 
         Log.d(TAG, "onCreateView: end")
         return view
@@ -254,13 +248,8 @@ class HomeFragment : Fragment() {
                 val updatedAt: Long = jsonObj.getLong("dt")
                 //画像icon id
                 val weatherIcon = weather.getString("icon")
-//                ICON = weatherIcon.toString()
                 Log.d(TAG, "onPostExecute: weatherIcon = $weatherIcon")
-                // アップデート時間いる？
-                val updatedAtTime = "更新時刻：\n" + SimpleDateFormat(
-                    "M/d k:m",
-                    Locale.ENGLISH
-                ).format(Date(updatedAt * 1000))
+                val updatedAtTime = "更新時刻：" + SimpleDateFormat("M/d k:mm", Locale.ENGLISH).format(Date(updatedAt * 1000))
                 val temp = main.getString("temp") + "°C"
                 Log.d(TAG, "onPostExecute: temp = $temp")
                 val tempMin = "Min Temp: " + main.getString("temp_min") + "°C"
@@ -430,35 +419,6 @@ class HomeFragment : Fragment() {
             Log.d(TAG, "onPostExecute: end")
         }
 
-    }
-
-    inner class getImageTask() : AsyncTask<String, Void, String>() {
-        private val TAG = "HomeFragment:getImageTask"
-
-        override fun doInBackground(vararg params: String?): String? {
-            Log.d(TAG, "doInBackground: start")
-            var iconUrl: String?
-            try {
-                //天気アイコン画像取得URL
-                //ToDo:Picassoのライセンス記載
-                iconUrl = URL("http://openweathermap.org/img/w/$ICON.png").toString()
-            } catch (e: Exception) {
-                iconUrl = null
-            }
-            Log.d(TAG, "doInBackground: end")
-            return iconUrl
-
-        }
-
-        override fun onPostExecute(result: String?) {
-            Log.d(TAG, "onPostExecute: start")
-
-            //画像の設定
-            Picasso.get().load(result).into(homeImage)
-
-            Log.d(TAG, "onPostExecute: end")
-
-        }
     }
 
 }
