@@ -21,362 +21,402 @@
             android:visibility="visible">
 
             <LinearLayout
-                android:id="@+id/addressContainer"
+                android:id="@+id/mainLinearContainer"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/address"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="郵便番号または市区町村を\n設定してください"
-                    android:textSize="18sp" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/overviewContainer"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/addressContainer"
-                android:gravity="center"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/recommendText"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_horizontal"
-                    android:text="洗濯物いつしよっかな"
-                    android:textSize="20sp" />
-
-                <!--TODO:天気予報にあわせてセンタくんの画像に変換する。複数の画像差し替え可能か？-->
-                <ImageView
-                    android:id="@+id/sentakun_image"
-                    android:layout_width="250sp"
-                    android:layout_height="250sp"
-                    android:layout_gravity="center"
-                    android:padding="5sp"
-                    android:src="@drawable/sentakun_home" />
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:weightSum="20">
 
                 <LinearLayout
-                    android:id="@+id/currentTextContainer"
+                    android:id="@+id/addressContainer"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:weightSum="5">
-
-                    <TextView
-                        android:id="@+id/updated_at"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="2"
-                        android:text="update time"
-                        android:textSize="10sp" />
-
-                    <TextView
-                        android:id="@+id/status"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_weight="3"
-                        android:text="@string/unknown"
-                        android:textSize="15sp" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/currentContainer"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:weightSum="5">
-
-                    <ImageView
-                        android:id="@+id/currentWeatherIcon"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_gravity="center_vertical"
-                        android:layout_weight="2"
-                        android:src="@drawable/ic_baseline_help_outline_24" />
-
-                    <TextView
-                        android:id="@+id/temp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_weight="3"
-                        android:gravity="center_horizontal"
-                        android:text="--℃"
-                        android:textSize="25sp" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/detailsContainer"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
+                    android:layout_weight="2"
+                    android:gravity="center"
                     android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/futureWeather"
+                        android:id="@+id/address"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="エリアを設定してください"
+                        />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/overviewContainer"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="18"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <!--TODO:天気予報にあわせてセンタくんの画像に変換する。複数の画像差し替え可能か？-->
+
+                    <TextView
+                        android:id="@+id/recommendText"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:gravity="center_horizontal"
-                        android:text="今後の天気"
-                        android:textSize="15sp" />
+                        android:layout_weight="3"
+                        android:gravity="center"
+                        android:textSize="20sp"
+                        android:text="洗濯物いつしよっかな" />
+
+                    <ImageView
+                        android:id="@+id/sentakun_image"
+                        android:layout_width="wrap_content"
+                        android:layout_height="250dp"
+                        android:layout_gravity="center"
+                        android:layout_weight="7"
+                        android:src="@drawable/sentakun_home" />
 
                     <LinearLayout
+                        android:id="@+id/currentTextContainer"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:baselineAligned="false"
+                        android:layout_weight="1"
                         android:orientation="horizontal"
-                        android:weightSum="4">
+                        android:weightSum="5">
 
-                        <LinearLayout
-                            android:layout_width="0dp"
+                        <TextView
+                            android:id="@+id/updated_at"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:gravity="center"
-                            android:orientation="vertical"
-                            android:padding="8dp">
+                            android:layout_weight="2"
+                            android:text="update time" />
 
-                            <ImageView
-                                android:id="@+id/laterImage3"
-                                android:layout_width="25dp"
-                                android:layout_height="25dp"
-                                android:src="@drawable/ic_baseline_help_outline_24" />
-
-                            <TextView
-                                android:id="@+id/laterTime3"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="@string/unknown"
-                                android:textSize="12sp" />
-
-                            <TextView
-                                android:id="@+id/laterTemp3"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="@string/unknown"
-                                android:textSize="14sp" />
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="0dp"
+                        <TextView
+                            android:id="@+id/status"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:gravity="center"
-                            android:orientation="vertical"
-                            android:padding="8dp">
+                            android:layout_gravity="center"
+                            android:layout_weight="3"
+                            android:text="@string/unknown" />
+                    </LinearLayout>
 
-                            <ImageView
-                                android:id="@+id/laterImage6"
-                                android:layout_width="25dp"
-                                android:layout_height="25dp"
-                                android:src="@drawable/ic_baseline_help_outline_24" />
+                    <LinearLayout
+                        android:id="@+id/currentContainer"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:orientation="horizontal"
+                        android:weightSum="5">
 
-                            <TextView
-                                android:id="@+id/laterTime6"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="@string/unknown"
-                                android:textSize="12sp" />
+                        <ImageView
+                            android:id="@+id/currentWeatherIcon"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="center_vertical"
+                            android:layout_weight="2"
+                            android:src="@drawable/ic_baseline_help_outline_24" />
 
-                            <TextView
-                                android:id="@+id/laterTemp6"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="@string/unknown"
-                                android:textSize="14sp" />
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:gravity="center"
-                            android:orientation="vertical"
-                            android:padding="8dp">
-
-                            <ImageView
-                                android:id="@+id/laterImage9"
-                                android:layout_width="25dp"
-                                android:layout_height="25dp"
-                                android:src="@drawable/ic_baseline_help_outline_24" />
-
-                            <TextView
-                                android:id="@+id/laterTime9"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="@string/unknown"
-                                android:textSize="12sp" />
-
-                            <TextView
-                                android:id="@+id/laterTemp9"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="@string/unknown"
-                                android:textSize="14sp" />
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:gravity="center"
-                            android:orientation="vertical"
-                            android:padding="8dp">
-
-                            <ImageView
-                                android:id="@+id/laterImage12"
-                                android:layout_width="25dp"
-                                android:layout_height="25dp"
-                                android:src="@drawable/ic_baseline_help_outline_24" />
-
-                            <TextView
-                                android:id="@+id/laterTime12"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="@string/unknown"
-                                android:textSize="12sp" />
-
-                            <TextView
-                                android:id="@+id/laterTemp12"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="@string/unknown"
-                                android:textSize="14sp" />
-                        </LinearLayout>
+                        <TextView
+                            android:id="@+id/temp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="fill"
+                            android:layout_weight="3"
+                            android:gravity="center_horizontal"
+                            android:text="--℃"
+                            android:textSize="30sp" />
 
                     </LinearLayout>
 
                     <LinearLayout
+                        android:id="@+id/detailsContainer"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:weightSum="4">
+                        android:layout_gravity="center"
+                        android:layout_weight="5"
+                        android:orientation="vertical"
+                        android:weightSum="7">
 
-                        <LinearLayout
-                            android:layout_width="0dp"
+                        <TextView
+                            android:id="@+id/futureWeather"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:gravity="center"
-                            android:orientation="vertical"
-                            android:padding="8dp">
+                            android:gravity="center_horizontal"
+                            android:text="今後の天気" />
 
-                            <ImageView
-                                android:id="@+id/laterImage15"
-                                android:layout_width="25dp"
-                                android:layout_height="25dp"
-                                android:src="@drawable/ic_baseline_help_outline_24" />
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="3"
+                            android:baselineAligned="false"
+                            android:paddingBottom="8dp"
+                            android:orientation="horizontal"
+                            android:weightSum="4">
 
-                            <TextView
-                                android:id="@+id/laterTime15"
+                            <LinearLayout
                                 android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="@string/unknown"
-                                android:textSize="12sp" />
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:orientation="vertical"
+                                android:weightSum="6">
 
-                            <TextView
-                                android:id="@+id/laterTemp15"
+                                <ImageView
+                                    android:id="@+id/laterImage3"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="3"
+                                    android:src="@drawable/ic_baseline_help_outline_24" />
+
+                                <TextView
+                                    android:id="@+id/laterTime3"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:text="@string/unknown"
+                                     />
+
+                                <TextView
+                                    android:id="@+id/laterTemp3"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="2"
+                                    android:text="@string/unknown"
+                                    />
+                            </LinearLayout>
+
+                            <LinearLayout
                                 android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="@string/unknown"
-                                android:textSize="14sp" />
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:orientation="vertical"
+                                android:weightSum="6">
+
+                                <ImageView
+                                    android:id="@+id/laterImage6"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="3"
+                                    android:src="@drawable/ic_baseline_help_outline_24" />
+
+                                <TextView
+                                    android:id="@+id/laterTime6"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:text="@string/unknown"
+                                    />
+
+                                <TextView
+                                    android:id="@+id/laterTemp6"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="2"
+                                    android:text="@string/unknown"
+                                    />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:orientation="vertical"
+                                android:weightSum="6">
+
+                                <ImageView
+                                    android:id="@+id/laterImage9"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="3"
+                                    android:src="@drawable/ic_baseline_help_outline_24" />
+
+                                <TextView
+                                    android:id="@+id/laterTime9"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:text="@string/unknown"
+                                    />
+
+                                <TextView
+                                    android:id="@+id/laterTemp9"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="2"
+                                    android:text="@string/unknown"
+                                    />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:orientation="vertical"
+                                android:weightSum="6">
+
+                                <ImageView
+                                    android:id="@+id/laterImage12"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="3"
+                                    android:src="@drawable/ic_baseline_help_outline_24" />
+
+                                <TextView
+                                    android:id="@+id/laterTime12"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:text="@string/unknown"
+                                    />
+
+                                <TextView
+                                    android:id="@+id/laterTemp12"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="2"
+                                    android:text="@string/unknown"
+                                    />
+                            </LinearLayout>
+
                         </LinearLayout>
 
                         <LinearLayout
-                            android:layout_width="0dp"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:gravity="center"
-                            android:orientation="vertical"
-                            android:padding="8dp">
+                            android:layout_weight="3"
+                            android:orientation="horizontal"
+                            android:weightSum="4">
 
-                            <ImageView
-                                android:id="@+id/laterImage18"
-                                android:layout_width="25dp"
-                                android:layout_height="25dp"
-                                android:src="@drawable/ic_baseline_help_outline_24" />
-
-                            <TextView
-                                android:id="@+id/laterTime18"
+                            <LinearLayout
                                 android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="@string/unknown"
-                                android:textSize="12sp" />
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:orientation="vertical"
+                                android:weightSum="6">
 
-                            <TextView
-                                android:id="@+id/laterTemp18"
+                                <ImageView
+                                    android:id="@+id/laterImage15"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="3"
+                                    android:src="@drawable/ic_baseline_help_outline_24" />
+
+                                <TextView
+                                    android:id="@+id/laterTime15"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:text="@string/unknown"
+                                    />
+
+                                <TextView
+                                    android:id="@+id/laterTemp15"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="2"
+                                    android:text="@string/unknown"
+                                    />
+                            </LinearLayout>
+
+                            <LinearLayout
                                 android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="@string/unknown"
-                                android:textSize="14sp" />
-                        </LinearLayout>
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:orientation="vertical"
+                                android:weightSum="6">
 
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:gravity="center"
-                            android:orientation="vertical"
-                            android:padding="8dp">
+                                <ImageView
+                                    android:id="@+id/laterImage18"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="3"
+                                    android:src="@drawable/ic_baseline_help_outline_24" />
 
-                            <ImageView
-                                android:id="@+id/laterImage21"
-                                android:layout_width="25dp"
-                                android:layout_height="25dp"
-                                android:src="@drawable/ic_baseline_help_outline_24" />
+                                <TextView
+                                    android:id="@+id/laterTime18"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:text="@string/unknown"
+                                    />
 
-                            <TextView
-                                android:id="@+id/laterTime21"
+                                <TextView
+                                    android:id="@+id/laterTemp18"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="2"
+                                    android:text="@string/unknown"
+                                    />
+                            </LinearLayout>
+
+                            <LinearLayout
                                 android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="@string/unknown"
-                                android:textSize="12sp" />
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:orientation="vertical"
+                                android:weightSum="6">
 
-                            <TextView
-                                android:id="@+id/laterTemp21"
+                                <ImageView
+                                    android:id="@+id/laterImage21"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="3"
+                                    android:src="@drawable/ic_baseline_help_outline_24" />
+
+                                <TextView
+                                    android:id="@+id/laterTime21"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:text="@string/unknown"
+                                    />
+
+                                <TextView
+                                    android:id="@+id/laterTemp21"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="2"
+                                    android:text="@string/unknown"
+                                    />
+                            </LinearLayout>
+
+                            <LinearLayout
                                 android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="@string/unknown"
-                                android:textSize="14sp" />
-                        </LinearLayout>
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:orientation="vertical"
+                                android:weightSum="6">
 
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:gravity="center"
-                            android:orientation="vertical"
-                            android:padding="8dp">
+                                <ImageView
+                                    android:id="@+id/laterImage24"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="3"
+                                    android:src="@drawable/ic_baseline_help_outline_24" />
 
-                            <ImageView
-                                android:id="@+id/laterImage24"
-                                android:layout_width="25dp"
-                                android:layout_height="25dp"
-                                android:src="@drawable/ic_baseline_help_outline_24" />
+                                <TextView
+                                    android:id="@+id/laterTime24"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:text="@string/unknown"
+                                    />
 
-                            <TextView
-                                android:id="@+id/laterTime24"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="@string/unknown"
-                                android:textSize="12sp" />
+                                <TextView
+                                    android:id="@+id/laterTemp24"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="2"
+                                    android:text="@string/unknown"
+                                    />
+                            </LinearLayout>
 
-                            <TextView
-                                android:id="@+id/laterTemp24"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="@string/unknown"
-                                android:textSize="14sp" />
                         </LinearLayout>
 
                     </LinearLayout>
-
                 </LinearLayout>
             </LinearLayout>
 
