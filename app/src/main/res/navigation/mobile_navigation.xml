@@ -5,29 +5,11 @@
     android:id="@+id/mobile_navigation"
     app:startDestination="@+id/navigation_home">
 
-<!--    <fragment-->
-<!--        android:id="@+id/navigation_weather"-->
-<!--        android:name="jp.devtact.sentakun.ui.weather.WeatherFragment"-->
-<!--        android:label="@string/title_weather"-->
-<!--        tools:layout="@layout/fragment_weather" />-->
-
-<!--    <fragment-->
-<!--        android:id="@+id/navigation_calender"-->
-<!--        android:name="jp.devtact.sentakun.ui.calender.CalenderFragment"-->
-<!--        android:label="@string/title_calender"-->
-<!--        tools:layout="@layout/fragment_calender" />-->
-
     <fragment
         android:id="@+id/navigation_home"
         android:name="jp.devtact.sentakun.ui.home.HomeFragment"
         android:label="@string/title_home"
         tools:layout="@layout/fragment_home" />
-
-<!--    <fragment-->
-<!--        android:id="@+id/navigation_chat"-->
-<!--        android:name="jp.devtact.sentakun.ui.chat.ChatFragment"-->
-<!--        android:label="@string/title_chat"-->
-<!--        tools:layout="@layout/fragment_chat" />-->
 
     <fragment
         android:id="@+id/navigation_setting"

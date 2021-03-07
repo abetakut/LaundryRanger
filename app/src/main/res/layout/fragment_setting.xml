@@ -11,8 +11,8 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
+            android:layout_height="match_parent"
+            android:gravity="bottom"
             android:orientation="vertical">
 
             <ImageView
@@ -26,14 +26,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal"
-                android:text="郵便番号or市区町村を入力してください"
+                android:text="@string/introduction"
                 android:textSize="15sp" />
 
             <TextView
                 android:id="@+id/setting_example"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="例)\n郵便番号の場合：123-456\n市区町村の場合(英語)：sapporo"
+                android:text="@string/input_sample"
                 android:textSize="15sp" />
 
 
@@ -48,7 +48,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="50sp"
                     android:layout_weight="4"
-                    android:hint="123-4567"
+                    android:hint="@string/post_code_hint"
                     android:imeOptions="actionDone"
                     android:inputType="text" />
 
@@ -57,7 +57,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="set" />
+                    android:text="@string/set" />
 
             </LinearLayout>
 

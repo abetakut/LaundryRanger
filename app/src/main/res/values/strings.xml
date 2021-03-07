@@ -7,4 +7,8 @@
     <string name="title_setting">Set</string>
     <string name="goHome">go home</string>
     <string name="unknown">--</string>
+    <string name="introduction">郵便番号or市区町村を入力してください</string>
+    <string name="input_sample">例)\n郵便番号の場合：123–456\n市区町村の場合(英語)：sapporo</string>
+    <string name="post_code_hint">123–4567</string>
+    <string name="set">set</string>
 </resources>
