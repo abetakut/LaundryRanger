@@ -31,7 +31,7 @@
                     android:id="@+id/addressContainer"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="2"
+                    android:layout_weight="3"
                     android:gravity="center"
                     android:orientation="vertical">
 
@@ -39,8 +39,7 @@
                         android:id="@+id/address"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="エリアを設定してください"
-                        />
+                        android:textSize="20sp" />
 
                 </LinearLayout>
 
@@ -48,7 +47,7 @@
                     android:id="@+id/overviewContainer"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="18"
+                    android:layout_weight="17"
                     android:gravity="center"
                     android:orientation="vertical">
 
@@ -58,18 +57,24 @@
                         android:id="@+id/recommendText"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="3"
+                        android:layout_marginStart="10sp"
+                        android:layout_marginEnd="10sp"
+                        android:layout_weight="5"
+                        android:autoSizeTextType="uniform"
                         android:gravity="center"
-                        android:textSize="20sp"
-                        android:text="洗濯物いつしよっかな" />
+                        android:maxLines="1"
+                        android:text="@string/initial_laundry_message"
+                        android:textSize="50sp" />
 
                     <ImageView
                         android:id="@+id/sentakun_image"
                         android:layout_width="wrap_content"
                         android:layout_height="250dp"
                         android:layout_gravity="center"
-                        android:layout_weight="7"
-                        android:src="@drawable/sentakun_home" />
+                        android:layout_weight="8"
+                        android:scaleType="centerInside"
+                        android:src="@drawable/app_icon"
+                        tools:ignore="ContentDescription" />
 
                     <LinearLayout
                         android:id="@+id/currentTextContainer"
@@ -84,15 +89,17 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="2"
-                            android:text="update time" />
+                            android:text="@string/update_time" />
 
                         <TextView
                             android:id="@+id/status"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_gravity="center"
                             android:layout_weight="3"
-                            android:text="@string/unknown" />
+                            android:autoSizeTextType="uniform"
+                            android:gravity="center"
+                            android:text="@string/unknown"
+                            android:textSize="20sp" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -109,7 +116,8 @@
                             android:layout_height="match_parent"
                             android:layout_gravity="center_vertical"
                             android:layout_weight="2"
-                            android:src="@drawable/ic_baseline_help_outline_24" />
+                            android:src="@drawable/ic_baseline_help_outline_24"
+                            tools:ignore="ContentDescription" />
 
                         <TextView
                             android:id="@+id/temp"
@@ -117,8 +125,9 @@
                             android:layout_height="match_parent"
                             android:layout_gravity="fill"
                             android:layout_weight="3"
+                            android:autoSizeTextType="uniform"
                             android:gravity="center_horizontal"
-                            android:text="--℃"
+                            android:text="@string/temp"
                             android:textSize="30sp" />
 
                     </LinearLayout>
@@ -128,7 +137,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:layout_weight="5"
+                        android:layout_weight="1"
                         android:orientation="vertical"
                         android:weightSum="7">
 
@@ -138,15 +147,15 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:gravity="center_horizontal"
-                            android:text="今後の天気" />
+                            android:text="@string/future_forecast" />
 
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="3"
                             android:baselineAligned="false"
-                            android:paddingBottom="8dp"
                             android:orientation="horizontal"
+                            android:paddingBottom="8dp"
                             android:weightSum="4">
 
                             <LinearLayout
@@ -154,31 +163,31 @@
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
                                 android:gravity="center"
-                                android:orientation="vertical"
-                                android:weightSum="6">
+                                android:orientation="vertical">
 
                                 <ImageView
                                     android:id="@+id/laterImage3"
-                                    android:layout_width="wrap_content"
+                                    android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:layout_weight="3"
-                                    android:src="@drawable/ic_baseline_help_outline_24" />
+                                    android:scaleType="centerInside"
+                                    android:src="@drawable/ic_baseline_help_outline_24"
+                                    tools:ignore="ContentDescription" />
 
                                 <TextView
                                     android:id="@+id/laterTime3"
-                                    android:layout_width="wrap_content"
+                                    android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:layout_weight="1"
-                                    android:text="@string/unknown"
-                                     />
+                                    android:gravity="center"
+                                    android:text="@string/unknown" />
 
                                 <TextView
                                     android:id="@+id/laterTemp3"
-                                    android:layout_width="wrap_content"
+                                    android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:layout_weight="2"
+                                    android:autoSizeTextType="uniform"
+                                    android:gravity="center"
                                     android:text="@string/unknown"
-                                    />
+                                    android:textSize="18sp" />
                             </LinearLayout>
 
                             <LinearLayout
@@ -186,31 +195,33 @@
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
                                 android:gravity="center"
-                                android:orientation="vertical"
-                                android:weightSum="6">
+                                android:orientation="vertical">
 
                                 <ImageView
                                     android:id="@+id/laterImage6"
-                                    android:layout_width="wrap_content"
+                                    android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:layout_weight="3"
-                                    android:src="@drawable/ic_baseline_help_outline_24" />
+                                    android:scaleType="centerInside"
+                                    android:src="@drawable/ic_baseline_help_outline_24"
+                                    tools:ignore="ContentDescription" />
 
                                 <TextView
                                     android:id="@+id/laterTime6"
-                                    android:layout_width="wrap_content"
+                                    android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
-                                    android:text="@string/unknown"
-                                    />
+                                    android:gravity="center"
+                                    android:text="@string/unknown" />
 
                                 <TextView
                                     android:id="@+id/laterTemp6"
-                                    android:layout_width="wrap_content"
+                                    android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="2"
+                                    android:autoSizeTextType="uniform"
+                                    android:gravity="center"
                                     android:text="@string/unknown"
-                                    />
+                                    android:textSize="18sp" />
                             </LinearLayout>
 
                             <LinearLayout
@@ -218,31 +229,33 @@
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
                                 android:gravity="center"
-                                android:orientation="vertical"
-                                android:weightSum="6">
+                                android:orientation="vertical">
 
                                 <ImageView
                                     android:id="@+id/laterImage9"
-                                    android:layout_width="wrap_content"
+                                    android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:layout_weight="3"
-                                    android:src="@drawable/ic_baseline_help_outline_24" />
+                                    android:scaleType="centerInside"
+                                    android:src="@drawable/ic_baseline_help_outline_24"
+                                    tools:ignore="ContentDescription" />
 
                                 <TextView
                                     android:id="@+id/laterTime9"
-                                    android:layout_width="wrap_content"
+                                    android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
-                                    android:text="@string/unknown"
-                                    />
+                                    android:gravity="center"
+                                    android:text="@string/unknown" />
 
                                 <TextView
                                     android:id="@+id/laterTemp9"
-                                    android:layout_width="wrap_content"
+                                    android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="2"
+                                    android:autoSizeTextType="uniform"
+                                    android:gravity="center"
                                     android:text="@string/unknown"
-                                    />
+                                    android:textSize="18sp" />
                             </LinearLayout>
 
                             <LinearLayout
@@ -250,31 +263,33 @@
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
                                 android:gravity="center"
-                                android:orientation="vertical"
-                                android:weightSum="6">
+                                android:orientation="vertical">
 
                                 <ImageView
                                     android:id="@+id/laterImage12"
-                                    android:layout_width="wrap_content"
+                                    android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:layout_weight="3"
-                                    android:src="@drawable/ic_baseline_help_outline_24" />
+                                    android:scaleType="centerInside"
+                                    android:src="@drawable/ic_baseline_help_outline_24"
+                                    tools:ignore="ContentDescription" />
 
                                 <TextView
                                     android:id="@+id/laterTime12"
-                                    android:layout_width="wrap_content"
+                                    android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
-                                    android:text="@string/unknown"
-                                    />
+                                    android:gravity="center"
+                                    android:text="@string/unknown" />
 
                                 <TextView
                                     android:id="@+id/laterTemp12"
-                                    android:layout_width="wrap_content"
+                                    android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="2"
+                                    android:autoSizeTextType="uniform"
+                                    android:gravity="center"
                                     android:text="@string/unknown"
-                                    />
+                                    android:textSize="18sp" />
                             </LinearLayout>
 
                         </LinearLayout>
@@ -283,6 +298,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="3"
+                            android:baselineAligned="false"
                             android:orientation="horizontal"
                             android:weightSum="4">
 
@@ -291,31 +307,33 @@
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
                                 android:gravity="center"
-                                android:orientation="vertical"
-                                android:weightSum="6">
+                                android:orientation="vertical">
 
                                 <ImageView
                                     android:id="@+id/laterImage15"
-                                    android:layout_width="wrap_content"
+                                    android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:layout_weight="3"
-                                    android:src="@drawable/ic_baseline_help_outline_24" />
+                                    android:scaleType="centerInside"
+                                    android:src="@drawable/ic_baseline_help_outline_24"
+                                    tools:ignore="ContentDescription" />
 
                                 <TextView
                                     android:id="@+id/laterTime15"
-                                    android:layout_width="wrap_content"
+                                    android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
-                                    android:text="@string/unknown"
-                                    />
+                                    android:gravity="center"
+                                    android:text="@string/unknown" />
 
                                 <TextView
                                     android:id="@+id/laterTemp15"
-                                    android:layout_width="wrap_content"
+                                    android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="2"
+                                    android:autoSizeTextType="uniform"
+                                    android:gravity="center"
                                     android:text="@string/unknown"
-                                    />
+                                    android:textSize="18sp" />
                             </LinearLayout>
 
                             <LinearLayout
@@ -323,31 +341,33 @@
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
                                 android:gravity="center"
-                                android:orientation="vertical"
-                                android:weightSum="6">
+                                android:orientation="vertical">
 
                                 <ImageView
                                     android:id="@+id/laterImage18"
-                                    android:layout_width="wrap_content"
+                                    android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:layout_weight="3"
-                                    android:src="@drawable/ic_baseline_help_outline_24" />
+                                    android:scaleType="centerInside"
+                                    android:src="@drawable/ic_baseline_help_outline_24"
+                                    tools:ignore="ContentDescription" />
 
                                 <TextView
                                     android:id="@+id/laterTime18"
-                                    android:layout_width="wrap_content"
+                                    android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
-                                    android:text="@string/unknown"
-                                    />
+                                    android:gravity="center"
+                                    android:text="@string/unknown" />
 
                                 <TextView
                                     android:id="@+id/laterTemp18"
-                                    android:layout_width="wrap_content"
+                                    android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="2"
+                                    android:autoSizeTextType="uniform"
+                                    android:gravity="center"
                                     android:text="@string/unknown"
-                                    />
+                                    android:textSize="18sp" />
                             </LinearLayout>
 
                             <LinearLayout
@@ -355,31 +375,33 @@
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
                                 android:gravity="center"
-                                android:orientation="vertical"
-                                android:weightSum="6">
+                                android:orientation="vertical">
 
                                 <ImageView
                                     android:id="@+id/laterImage21"
-                                    android:layout_width="wrap_content"
+                                    android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:layout_weight="3"
-                                    android:src="@drawable/ic_baseline_help_outline_24" />
+                                    android:scaleType="centerInside"
+                                    android:src="@drawable/ic_baseline_help_outline_24"
+                                    tools:ignore="ContentDescription" />
 
                                 <TextView
                                     android:id="@+id/laterTime21"
-                                    android:layout_width="wrap_content"
+                                    android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
-                                    android:text="@string/unknown"
-                                    />
+                                    android:gravity="center"
+                                    android:text="@string/unknown" />
 
                                 <TextView
                                     android:id="@+id/laterTemp21"
-                                    android:layout_width="wrap_content"
+                                    android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="2"
+                                    android:autoSizeTextType="uniform"
+                                    android:gravity="center"
                                     android:text="@string/unknown"
-                                    />
+                                    android:textSize="18sp" />
                             </LinearLayout>
 
                             <LinearLayout
@@ -387,31 +409,33 @@
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
                                 android:gravity="center"
-                                android:orientation="vertical"
-                                android:weightSum="6">
+                                android:orientation="vertical">
 
                                 <ImageView
                                     android:id="@+id/laterImage24"
-                                    android:layout_width="wrap_content"
+                                    android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:layout_weight="3"
-                                    android:src="@drawable/ic_baseline_help_outline_24" />
+                                    android:scaleType="centerInside"
+                                    android:src="@drawable/ic_baseline_help_outline_24"
+                                    tools:ignore="ContentDescription" />
 
                                 <TextView
                                     android:id="@+id/laterTime24"
-                                    android:layout_width="wrap_content"
+                                    android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
-                                    android:text="@string/unknown"
-                                    />
+                                    android:gravity="center"
+                                    android:text="@string/unknown" />
 
                                 <TextView
                                     android:id="@+id/laterTemp24"
-                                    android:layout_width="wrap_content"
+                                    android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="2"
+                                    android:autoSizeTextType="uniform"
+                                    android:gravity="center"
                                     android:text="@string/unknown"
-                                    />
+                                    android:textSize="18sp" />
                             </LinearLayout>
 
                         </LinearLayout>
@@ -434,7 +458,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:text="Something went wrong"
+            android:text="@string/error_text"
             android:visibility="gone" />
 
     </RelativeLayout>

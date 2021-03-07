@@ -11,4 +11,9 @@
     <string name="input_sample">例)\n郵便番号の場合：123–456\n市区町村の場合(英語)：sapporo</string>
     <string name="post_code_hint">123–4567</string>
     <string name="set">set</string>
+    <string name="initial_laundry_message">いつ洗濯しよっかな</string>
+    <string name="update_time">update time</string>
+    <string name="temp">--℃</string>
+    <string name="future_forecast">今後の天気</string>
+    <string name="error_text">Something went wrong</string>
 </resources>
