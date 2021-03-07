@@ -7,16 +7,19 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
-private const val TAG = "MainActivity"
 
 class MainActivity : AppCompatActivity() {
+
+    val TAG = "MainActivity"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         Log.d(TAG, "onCreate: start")
         setContentView(R.layout.activity_main)
-        val navView: BottomNavigationView = findViewById(R.id.nav_view)
+
+        val navView: BottomNavigationView = findViewById(R.id.button_navigation)
         val navController = findNavController(R.id.nav_host_fragment)
+
         navView.setupWithNavController(navController)
 
         Log.d(TAG, "onCreate: end")
